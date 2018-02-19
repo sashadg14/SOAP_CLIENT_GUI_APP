@@ -922,5 +922,10 @@
       <DataType>text|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
+    <column id="232" parent="229" name="text">
+      <Position>3</Position>
+      <DataType>varchar(3000)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
   </database-model>
 </dataSource>
