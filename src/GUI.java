@@ -5,17 +5,19 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.rmi.RemoteException;
 
 public class GUI {
-    JFrame jFrame = new JFrame("JS Guide");
-    JButton reloadButton = new JButton(new ImageIcon("src\\resources\\resize.png"));
-    JTextArea jTextArea;
-    JButton editTextButton;
-    JButton addSubsectionButton;
-    JButton addSectionButton;
-    JButton deleteSubsectionButton;
-    Contoller contoller = new Contoller();
-
+    private JFrame jFrame = new JFrame("JS Guide");
+    private JButton reloadButton = new JButton(new ImageIcon("src\\resources\\resize.png"));
+    private JTextArea jTextArea;
+    private JButton editTextButton;
+    private JButton addSubsectionButton;
+    private JButton addSectionButton;
+    private JButton deleteSubsectionButton;
+    private Contoller contoller = new Contoller();
+    private int leftAligmentBtn=300;
+    private int heightOfTextArea=500,widthOfTextArea=1000;
 
     public GUI() {
         deleteSubsectionButton = new JButton("Удалить подраздел");
@@ -33,15 +35,15 @@ public class GUI {
                 createTree();
         });
 
-        addSubsectionButton.setBounds(200, 0, 300, 30);
+        addSubsectionButton.setBounds(leftAligmentBtn, 0, 300, 30);
         addSubsectionButton.addActionListener(createAddSubsectionBtnActionListener());
         jFrame.add(addSubsectionButton);
 
-        addSectionButton.setBounds(200, 50, 300, 30);
+        addSectionButton.setBounds(leftAligmentBtn, 50, 300, 30);
         addSectionButton.addActionListener(createAddSectionBtnActionListener());
         jFrame.add(addSectionButton);
 
-        deleteSubsectionButton.setBounds(200, 100, 300, 30);
+        deleteSubsectionButton.setBounds(leftAligmentBtn, 100, 300, 30);
         deleteSubsectionButton.addActionListener(createDeleteBtnActionListener());
         jFrame.add(deleteSubsectionButton);
 
@@ -55,11 +57,7 @@ public class GUI {
 
     private ActionListener createEditBtnActionListener() {
         return e -> {
-            try {
                 contoller.setInfoToSubsection(parPath.getLastPathComponent().toString(),selectedObj.toString(),jTextArea.getText());
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
         };
     }
 
@@ -75,8 +73,9 @@ public class GUI {
     private ActionListener createAddSubsectionBtnActionListener() {
         return e -> {
                 String n=JOptionPane.showInputDialog ("Название подраздела");
-                if(n!=null&&!n.equals(""))
-                contoller.addSubsection(selectedSection.toString(),n);
+                if(n!=null&&!n.equals("")) {
+                        contoller.addSubsection(selectedSection.toString(),n);
+                }
                 createTree();
         };
     }
@@ -84,14 +83,14 @@ public class GUI {
     private ActionListener createAddSectionBtnActionListener() {
         return e -> {
                 String sectionName=JOptionPane.showInputDialog ("Название раздела");
-                String subSectionName=JOptionPane.showInputDialog ("Название подраздела");
-                if(sectionName!=null&&!sectionName.equals("")&&subSectionName!=null&&!subSectionName.equals(""))
-                contoller.addSubsection(sectionName,subSectionName);
+                if(sectionName!=null&&!sectionName.equals("")) {
+                        contoller.addSection(sectionName);
+                }
            createTree();
         };
     }
-    JTree jTree;
-    JScrollPane jScrollPane;
+    private JTree jTree;
+    private JScrollPane jScrollPane;
     private void createTree(){
         if(jScrollPane!=null)
         jFrame.remove(jScrollPane);
@@ -103,9 +102,9 @@ public class GUI {
         jTree.addTreeSelectionListener(createTreeSelectionListener(jTree));
     }
 
-    TreePath parPath;
-    Object selectedObj;
-    Object selectedSection;
+    private TreePath parPath;
+    private Object selectedObj;
+    private Object selectedSection;
 
     private TreeSelectionListener createTreeSelectionListener(JTree jTree) {
         return e -> {
@@ -126,12 +125,10 @@ public class GUI {
         };
     }
 
-
-
     private JTextArea createTextAreaAtScrollPane() {
         JTextArea jTextArea = new JTextArea();
         JScrollPane jScrollPane = new JScrollPane(jTextArea);
-        jScrollPane.setBounds(300, 150, 1000, 500);
+        jScrollPane.setBounds(leftAligmentBtn, 150, widthOfTextArea, heightOfTextArea);
         jFrame.add(jScrollPane);
         return jTextArea;
     }

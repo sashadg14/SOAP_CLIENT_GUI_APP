@@ -1,16 +1,14 @@
+import servise_connectors.SOAPServiseConnector;
+import servise_connectors.ServiseConnectorInterphace;
+import servise_connectors.ThriftServiseConnector;
+
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreePath;
-import java.io.*;
-import java.rmi.RemoteException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class Contoller {
-    ServiseConnector serviseConnector = new ServiseConnector();
+   // private ServiseConnectorInterphace serviseConnector = new SOAPServiseConnector();
+    private ServiseConnectorInterphace serviseConnector = new ThriftServiseConnector();
 
     public JTree buildTree(){
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("JsReference");
@@ -23,82 +21,32 @@ public class Contoller {
         return jTree;
     }
 
-    public List<String> getSections() {
-        List<String> sectionList = new ArrayList<>();
-        /*File mainDir = new File("JsReference");
-        for (File file : Objects.requireNonNull(mainDir.listFiles()))
-            sectionList.add(file.getName());*/
-        try {
-            sectionList= /*new DataBaseConnector().getSections()*/Arrays.asList(serviseConnector.getSectionsArray());
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-
-        return sectionList;
+    private List<String> getSections() {
+        return serviseConnector.getSectionsArray();
     }
 
     public List<String> getSubsections(String sectionName) {
-        List<String> strings = new ArrayList<>();
-        /*for (String str : getSections())
-            if (str.equals(sectionName)) {
-                File file = new File("JsReference\\" + sectionName);
-                for (File file1 : file.listFiles()) {
-                    strings.add(file1.getName());
-                }
-            }*/
-        try {
-            strings=new DataBaseConnector().getSubections(sectionName);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return strings;
+        return serviseConnector.getSubsections(sectionName);
     }
 
     public String getInfoFromSubsection(String sectionName, String subsectionName){
-        /*File file = new File("JsReference\\" + sectionName + "\\" + subsectionName);
-        FileInputStream fstream = new FileInputStream(file);
-        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-        String strLine;
-        StringBuilder stringBuilder = new StringBuilder();
-        while ((strLine = br.readLine()) != null) {
-            stringBuilder.append(strLine + "\n");
-        }*/
-        try {
-            return new DataBaseConnector().getSubectionData(sectionName,subsectionName);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return "";
+        return serviseConnector.getSubsectionInfo(sectionName,subsectionName);
     }
 
     public void deleteSubsection(String sectionName, String subsectionName){
-        try {
-            new DataBaseConnector().deleteSubsection(sectionName,subsectionName);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+            serviseConnector.deleteSubsection(sectionName,subsectionName);
     }
 
-    public void setInfoToSubsection(String sectionName, String subsectionName, String newText) throws IOException {
-        /*File file = new File("JsReference\\" + sectionName + "\\" + subsectionName);
-        PrintWriter printWriter = new PrintWriter(file);
-        printWriter.print(newText);
-        printWriter.close();*/
-        String s=newText.replace("'","\\'");
-       // System.out.println(s);
-        try {
-            new DataBaseConnector().setSubsectionData(sectionName,subsectionName,s);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void setInfoToSubsection(String sectionName, String subsectionName, String newText){
+       serviseConnector.setInfoInSubsection(sectionName,subsectionName,newText);
     }
 
     public void addSubsection(String sectionName, String subsectionName){
-        try {
-            new DataBaseConnector().addNewSubsection(sectionName,subsectionName);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        serviseConnector.addSubsection(sectionName,subsectionName);
+    }
+
+    public void addSection(String sectionName){
+        serviseConnector.addSection(sectionName);
     }
 
 }
