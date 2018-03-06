@@ -1,27 +1,29 @@
-package servise_connectors;
+package thrift_servise;
 
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
-import org.apache.thrift.transport.TTransportException;
-import thrift_servise.JsReferenceService;
+import thrift_servise.servise.JsReferenceService;
+import thrift_servise.servise.Section;
+import thrift_servise.servise.Subsection;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
-public class ThriftServiseConnector implements ServiseConnectorInterphace {
+public class ThriftServiseConnector{
 
-    @Override
-    public List<String> getSectionsArray() {
+    String ip="localhost";
+    int port=9090;
+
+    public List<Section> getSectionsArray() {
         try {
-            TTransport transport= new TSocket("localhost", 9090);
+            TTransport transport= new TSocket(ip, port);
             transport.open();
             TProtocol protocol = new TBinaryProtocol(transport);
             JsReferenceService.Client client = new JsReferenceService.Client(protocol);
-            List<String> strings=(client.getSections());
+            List<Section> strings=(client.getSections());
             transport.close();
             if (strings!=null)
                 return strings;
@@ -31,44 +33,23 @@ public class ThriftServiseConnector implements ServiseConnectorInterphace {
         }
     }
 
-    @Override
-    public List<String> getSubsections(String section) {
+    public Subsection getSubsection(String sectionName, String subsectionName) {
         try {
-            TTransport transport= new TSocket("localhost", 9090);
+            TTransport transport= new TSocket("localhost", port);
             transport.open();
             TProtocol protocol = new TBinaryProtocol(transport);
             JsReferenceService.Client client = new JsReferenceService.Client(protocol);
-            List<String> strings=(client.getSubsections(section));
+            Subsection subsection=client.getSubsection(sectionName,subsectionName);
             transport.close();
-            if (strings!=null)
-                return strings;
-            return new ArrayList<>();
+                return subsection;
         } catch (TException x) {
-            return new ArrayList<>();
+            return null;
         }
     }
 
-    @Override
-    public String getSubsectionInfo(String sectionName, String subsectionName) {
-        try {
-            TTransport transport= new TSocket("localhost", 9090);
-            transport.open();
-            TProtocol protocol = new TBinaryProtocol(transport);
-            JsReferenceService.Client client = new JsReferenceService.Client(protocol);
-            String string=(client.getSubsectionInfo(sectionName,subsectionName));
-            transport.close();
-            if (string!=null)
-                return string;
-            return "";
-        } catch (TException x) {
-            return "";
-        }
-    }
-
-    @Override
     public void deleteSubsection(String sectionName, String subsectionName) {
         try {
-            TTransport transport= new TSocket("localhost", 9090);
+            TTransport transport= new TSocket(ip, port);
             transport.open();
             TProtocol protocol = new TBinaryProtocol(transport);
             JsReferenceService.Client client = new JsReferenceService.Client(protocol);
@@ -78,40 +59,37 @@ public class ThriftServiseConnector implements ServiseConnectorInterphace {
         }
     }
 
-    @Override
-    public void setInfoInSubsection(String sectionName, String subsectionName, String newText) {
+    public void updateSubsection(String sectionName, String subsectionName, String newInfo) {
         try {
-            TTransport transport= new TSocket("localhost", 9090);
+            TTransport transport= new TSocket(ip, port);
             transport.open();
             TProtocol protocol = new TBinaryProtocol(transport);
             JsReferenceService.Client client = new JsReferenceService.Client(protocol);
-            client.setInfoInSubsection(sectionName,subsectionName,newText);
+            client.updateSubsection(sectionName,new Subsection(subsectionName,newInfo));
             transport.close();
         } catch (TException x) {
         }
     }
 
-    @Override
-    public void addSubsection(String sectionName, String subsectionName) {
+    public void addSubsection(String sectionName, String subsection) {
         try {
-            TTransport transport= new TSocket("localhost", 9090);
+            TTransport transport= new TSocket(ip, port);
             transport.open();
             TProtocol protocol = new TBinaryProtocol(transport);
             JsReferenceService.Client client = new JsReferenceService.Client(protocol);
-            client.addSubsection(sectionName,subsectionName);
+            client.addSubsection(sectionName,new Subsection(subsection,""));
             transport.close();
         } catch (TException x) {
         }
     }
 
-    @Override
-    public void addSection(String sectionName) {
+    public void addSection(String section) {
         try {
-            TTransport transport= new TSocket("localhost", 9090);
+            TTransport transport= new TSocket(ip, port);
             transport.open();
             TProtocol protocol = new TBinaryProtocol(transport);
             JsReferenceService.Client client = new JsReferenceService.Client(protocol);
-            client.addSection(sectionName);
+            client.addSection(new Section(section,new ArrayList<>()));
             transport.close();
         } catch (TException x) {
         }

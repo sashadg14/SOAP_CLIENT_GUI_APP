@@ -1,4 +1,4 @@
-package servise_connectors;
+package soap;
 
 import org.apache.ws.axis2.CustomServiceStub;
 
@@ -7,52 +7,36 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SOAPServiseConnector implements ServiseConnectorInterphace {
+public class SOAPServiseConnector{
     private final String END_POINT = "http://localhost:8080/axis2/services/CustomService?wsdl";
 
-    public List<String> getSectionsArray() {
+    public List<CustomServiceStub.Section> getSectionsArray() {
         try {
             CustomServiceStub stub = new CustomServiceStub(END_POINT);
             CustomServiceStub.GetSections getSections = new CustomServiceStub.GetSections();
             CustomServiceStub.GetSectionsResponse getSectionsResponse = stub.getSections(getSections);
-            String[] strings = getSectionsResponse.get_return();
-            if (strings != null)
-                return Arrays.asList(strings);
+            CustomServiceStub.Section[] sections = getSectionsResponse.get_return();
+            if (sections != null)
+                return Arrays.asList(sections);
             else return new ArrayList<>();
         } catch (RemoteException e) {
             return new ArrayList<>();
         }
     }
 
-    public List<String> getSubsections(String section) {
+    public CustomServiceStub.Subsection getSubsection(String sectionName, String subsectionName) {
         try {
             CustomServiceStub stub = new CustomServiceStub(END_POINT);
-            CustomServiceStub.GetSubsections getSubsections = new CustomServiceStub.GetSubsections();
-            getSubsections.setSectionName(section);
-            CustomServiceStub.GetSubsectionsResponse getSubsectionsResponse = stub.getSubsections(getSubsections);
-            String[] strings = getSubsectionsResponse.get_return();
-            if (strings != null)
-                return Arrays.asList(strings);
-            else return new ArrayList<>();
-        } catch (RemoteException e) {
-            return new ArrayList<>();
-        }
-    }
-
-    public String getSubsectionInfo(String sectionName, String subsectionName) {
-        try {
-            CustomServiceStub stub = new CustomServiceStub(END_POINT);
-            CustomServiceStub.GetInfoFromSubsection getInfoFromSubsection = new CustomServiceStub.GetInfoFromSubsection();
-            getInfoFromSubsection.setSectionName(sectionName);
-            getInfoFromSubsection.setSubsectionName(subsectionName);
-            CustomServiceStub.GetInfoFromSubsectionResponse getInfoFromSubsection1 = stub.getInfoFromSubsection(getInfoFromSubsection);
-            String response = getInfoFromSubsection1.get_return();
+            CustomServiceStub.GetSubsection getSubsection = new CustomServiceStub.GetSubsection();
+            getSubsection.setSectionName(sectionName);
+            getSubsection.setSubsectionName(subsectionName);
+            CustomServiceStub.GetSubsectionResponse getInfoFromSubsectionResp = stub.getSubsection(getSubsection);
+            CustomServiceStub.Subsection response = getInfoFromSubsectionResp.get_return();
             if (response != null)
                 return response;
-            else return "";
         } catch (RemoteException e) {
-            return "";
         }
+        return null;
     }
 
     public void deleteSubsection(String sectionName, String subsectionName) {
@@ -66,14 +50,20 @@ public class SOAPServiseConnector implements ServiseConnectorInterphace {
         }
     }
 
-    public void setInfoInSubsection(String sectionName, String subsectionName, String newText) {
+
+
+    public void updateSubsection(String sectionName, String subsectionName,String newText) {
         try {
             CustomServiceStub stub = new CustomServiceStub(END_POINT);
-            CustomServiceStub.SetInfoToSubsection setInfoToSubsection = new CustomServiceStub.SetInfoToSubsection();
-            setInfoToSubsection.setSectionName(sectionName);
-            setInfoToSubsection.setSubsectionName(subsectionName);
-            setInfoToSubsection.setNewText(newText);
-            stub.setInfoToSubsection(setInfoToSubsection);
+            CustomServiceStub.UpdateSubsection updateSubsection= new CustomServiceStub.UpdateSubsection();
+
+            CustomServiceStub.Subsection subsection=new CustomServiceStub.Subsection();
+            subsection.setName(subsectionName);
+            subsection.setInfo(newText);
+
+            updateSubsection.setSectionName(sectionName);
+            updateSubsection.setSubsection(subsection);
+            stub.updateSubsection(updateSubsection);
         } catch (RemoteException ignored) {
         }
         ;
@@ -84,7 +74,10 @@ public class SOAPServiseConnector implements ServiseConnectorInterphace {
             CustomServiceStub stub = new CustomServiceStub(END_POINT);
             CustomServiceStub.AddSubsection addSubsection = new CustomServiceStub.AddSubsection();
             addSubsection.setSectionName(sectionName);
-            addSubsection.setSubsectionName(subsectionName);
+            CustomServiceStub.Subsection subsection=new CustomServiceStub.Subsection();
+            subsection.setName(subsectionName);
+            subsection.setInfo("");
+            addSubsection.setSubsection(subsection);
             stub.addSubsection(addSubsection);
         } catch (RemoteException ignored) {
         }
@@ -94,7 +87,11 @@ public class SOAPServiseConnector implements ServiseConnectorInterphace {
         try {
             CustomServiceStub stub = new CustomServiceStub(END_POINT);
             CustomServiceStub.AddSection addSection = new CustomServiceStub.AddSection();
-            addSection.setSectionName(sectionName);
+            CustomServiceStub.Section section=new CustomServiceStub.Section();
+            section.setName(sectionName);
+            //System.out.println(sectionName);
+            section.setSubsectionsNames(new String[]{});
+            addSection.setSection(section);
             stub.addSection(addSection);
         } catch (RemoteException ignored){}
     }

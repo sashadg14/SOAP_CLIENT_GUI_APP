@@ -1,11 +1,10 @@
+package soap;
+
 import javax.swing.*;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.rmi.RemoteException;
 
 public class GUI {
     private JFrame jFrame = new JFrame("JS Guide");
@@ -15,7 +14,7 @@ public class GUI {
     private JButton addSubsectionButton;
     private JButton addSectionButton;
     private JButton deleteSubsectionButton;
-    private Contoller contoller = new Contoller();
+    private SOAPServiseConnector soapServiseConnector=new SOAPServiseConnector();
     private int leftAligmentBtn=300;
     private int heightOfTextArea=500,widthOfTextArea=1000;
 
@@ -57,14 +56,15 @@ public class GUI {
 
     private ActionListener createEditBtnActionListener() {
         return e -> {
-                contoller.setInfoToSubsection(parPath.getLastPathComponent().toString(),selectedObj.toString(),jTextArea.getText());
+                soapServiseConnector.updateSubsection(parPath.getLastPathComponent().toString(),selectedObj.toString(),jTextArea.getText());
         };
     }
 
     private ActionListener createDeleteBtnActionListener() {
         return e -> {
             if(selectedObj!=null) {
-                contoller.deleteSubsection(parPath.getLastPathComponent().toString(), selectedObj.toString());
+                soapServiseConnector.deleteSubsection(parPath.getLastPathComponent().toString(), selectedObj.toString());
+                jTextArea.setText("");
                 createTree();
             }
         };
@@ -74,7 +74,7 @@ public class GUI {
         return e -> {
                 String n=JOptionPane.showInputDialog ("Название подраздела");
                 if(n!=null&&!n.equals("")) {
-                        contoller.addSubsection(selectedSection.toString(),n);
+                        soapServiseConnector.addSubsection(selectedSection.toString(),n);
                 }
                 createTree();
         };
@@ -84,7 +84,7 @@ public class GUI {
         return e -> {
                 String sectionName=JOptionPane.showInputDialog ("Название раздела");
                 if(sectionName!=null&&!sectionName.equals("")) {
-                        contoller.addSection(sectionName);
+                        soapServiseConnector.addSection(sectionName);
                 }
            createTree();
         };
@@ -114,13 +114,13 @@ public class GUI {
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTree.getLastSelectedPathComponent();
             if (parPath.toString().equals("[JsReference]")) {
                 addSubsectionButton.setText("Добавить подраздел в " + selected);
-                for (String s : new Contoller().getSubsections(selected))
-                    node.add(new DefaultMutableTreeNode(s));
-                jTree.expandPath(e.getPath());
+              /*  for (String s : new soap.Contoller().getSubsections(selected))
+                    node.add(new DefaultMutableTreeNode(s));*/
+               // jTree.expandPath(e.getPath());
                 selectedObj=null;
                 selectedSection=jTree.getLastSelectedPathComponent();
             } else {
-                    jTextArea.setText(new Contoller().getInfoFromSubsection(parPath.getLastPathComponent().toString(), selected));
+                    jTextArea.setText(new SOAPServiseConnector().getSubsection(parPath.getLastPathComponent().toString(), selected).getInfo());
             }
         };
     }

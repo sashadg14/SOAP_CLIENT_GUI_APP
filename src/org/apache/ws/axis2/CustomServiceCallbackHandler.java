@@ -42,23 +42,6 @@ public abstract class CustomServiceCallbackHandler {
 
     // No methods generated for meps other than in-out
 
-    // No methods generated for meps other than in-out
-
-    /**
-     * auto generated Axis2 call back method for getSubsections method
-     * override this method for handling normal response from getSubsections operation
-     */
-    public void receiveResultgetSubsections(
-        org.apache.ws.axis2.CustomServiceStub.GetSubsectionsResponse result) {
-    }
-
-    /**
-     * auto generated Axis2 Error handler
-     * override this method for handling error response from getSubsections operation
-     */
-    public void receiveErrorgetSubsections(java.lang.Exception e) {
-    }
-
     /**
      * auto generated Axis2 call back method for getSections method
      * override this method for handling normal response from getSections operation
@@ -76,18 +59,20 @@ public abstract class CustomServiceCallbackHandler {
 
     // No methods generated for meps other than in-out
 
+    // No methods generated for meps other than in-out
+
     /**
-     * auto generated Axis2 call back method for getInfoFromSubsection method
-     * override this method for handling normal response from getInfoFromSubsection operation
+     * auto generated Axis2 call back method for getSubsection method
+     * override this method for handling normal response from getSubsection operation
      */
-    public void receiveResultgetInfoFromSubsection(
-        org.apache.ws.axis2.CustomServiceStub.GetInfoFromSubsectionResponse result) {
+    public void receiveResultgetSubsection(
+        org.apache.ws.axis2.CustomServiceStub.GetSubsectionResponse result) {
     }
 
     /**
      * auto generated Axis2 Error handler
-     * override this method for handling error response from getInfoFromSubsection operation
+     * override this method for handling error response from getSubsection operation
      */
-    public void receiveErrorgetInfoFromSubsection(java.lang.Exception e) {
+    public void receiveErrorgetSubsection(java.lang.Exception e) {
     }
 }
