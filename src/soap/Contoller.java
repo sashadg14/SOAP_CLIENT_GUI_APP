@@ -8,15 +8,16 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import java.util.Enumeration;
-import java.util.List;
 
 public class Contoller {
     private SOAPServiseConnector serviseConnector = new SOAPServiseConnector();
    // private ServiseConnectorInterphace serviseConnector = new ThriftServiseConnector();
 
-    public JTree buildTree(){
+    public JTree buildInfo(JLabel jLabel){
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("JsReference");
-        for (CustomServiceStub.Section section :/*serviseConnector.getSectionsArray()*/getSections()) {
+        CustomServiceStub.JsRefference jsRefference=getJsRef();
+        jLabel.setText("Author: "+jsRefference.getAuthor().getFirstName()+" "+jsRefference.getAuthor().getLastName()+",from "+jsRefference.getAuthor().getSpeciality());
+        for (CustomServiceStub.Section section :jsRefference.getSectionList()) {
             DefaultMutableTreeNode node=new DefaultMutableTreeNode(section.getName());
             String[] arr=section.getSubsectionsNames();
             if (arr!=null)
@@ -25,6 +26,7 @@ public class Contoller {
             }
             root.add(node);
         }
+
         JTree jTree = new JTree(root);
         expandAll(jTree,new TreePath(root));
         jTree.setShowsRootHandles(true);
@@ -46,8 +48,8 @@ public class Contoller {
         tree.expandPath(parent);
         // tree.collapsePath(parent);
     }
-    private List<CustomServiceStub.Section> getSections() {
-        return serviseConnector.getSectionsArray();
+    private CustomServiceStub.JsRefference getJsRef() {
+        return serviseConnector.getJsRefference();
     }
 
 

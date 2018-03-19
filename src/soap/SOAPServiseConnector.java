@@ -3,24 +3,19 @@ package soap;
 import org.apache.ws.axis2.CustomServiceStub;
 
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class SOAPServiseConnector{
     private final String END_POINT = "http://localhost:8080/axis2/services/CustomService?wsdl";
 
-    public List<CustomServiceStub.Section> getSectionsArray() {
+    public CustomServiceStub.JsRefference getJsRefference() {
         try {
             CustomServiceStub stub = new CustomServiceStub(END_POINT);
-            CustomServiceStub.GetSections getSections = new CustomServiceStub.GetSections();
-            CustomServiceStub.GetSectionsResponse getSectionsResponse = stub.getSections(getSections);
-            CustomServiceStub.Section[] sections = getSectionsResponse.get_return();
-            if (sections != null)
-                return Arrays.asList(sections);
-            else return new ArrayList<>();
+            CustomServiceStub.GetJsRefference getJsRefference= new CustomServiceStub.GetJsRefference();
+            CustomServiceStub.GetJsRefferenceResponse getJsRefferenceResponse = stub.getJsRefference(getJsRefference);
+            CustomServiceStub.JsRefference jsRefference = getJsRefferenceResponse.get_return();
+            return jsRefference;
         } catch (RemoteException e) {
-            return new ArrayList<>();
+            return null;
         }
     }
 
@@ -32,6 +27,7 @@ public class SOAPServiseConnector{
             getSubsection.setSubsectionName(subsectionName);
             CustomServiceStub.GetSubsectionResponse getInfoFromSubsectionResp = stub.getSubsection(getSubsection);
             CustomServiceStub.Subsection response = getInfoFromSubsectionResp.get_return();
+
             if (response != null)
                 return response;
         } catch (RemoteException e) {

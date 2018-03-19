@@ -118,10 +118,10 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
 
         _operations[1] = __operation;
 
-        __operation = new org.apache.axis2.description.OutInAxisOperation();
+        __operation = new org.apache.axis2.description.OutOnlyAxisOperation();
 
         __operation.setName(new javax.xml.namespace.QName(
-                "http://ws.apache.org/axis2", "getSections"));
+                "http://ws.apache.org/axis2", "addSubsection"));
         _service.addOperation(__operation);
 
         _operations[2] = __operation;
@@ -129,15 +129,15 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
         __operation = new org.apache.axis2.description.OutOnlyAxisOperation();
 
         __operation.setName(new javax.xml.namespace.QName(
-                "http://ws.apache.org/axis2", "addSubsection"));
+                "http://ws.apache.org/axis2", "updateSubsection"));
         _service.addOperation(__operation);
 
         _operations[3] = __operation;
 
-        __operation = new org.apache.axis2.description.OutOnlyAxisOperation();
+        __operation = new org.apache.axis2.description.OutInAxisOperation();
 
         __operation.setName(new javax.xml.namespace.QName(
-                "http://ws.apache.org/axis2", "updateSubsection"));
+                "http://ws.apache.org/axis2", "getSubsection"));
         _service.addOperation(__operation);
 
         _operations[4] = __operation;
@@ -145,7 +145,7 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
         __operation = new org.apache.axis2.description.OutInAxisOperation();
 
         __operation.setName(new javax.xml.namespace.QName(
-                "http://ws.apache.org/axis2", "getSubsection"));
+                "http://ws.apache.org/axis2", "getJsRefference"));
         _service.addOperation(__operation);
 
         _operations[5] = __operation;
@@ -252,271 +252,13 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
     /**
      * Auto generated method signature
      *
-     * @see org.apache.ws.axis2.CustomService#getSections
-     * @param getSections2
-     */
-    public org.apache.ws.axis2.CustomServiceStub.GetSectionsResponse getSections(
-        org.apache.ws.axis2.CustomServiceStub.GetSections getSections2)
-        throws java.rmi.RemoteException {
-        org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
-
-        try {
-            org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[2].getName());
-            _operationClient.getOptions().setAction("urn:getSections");
-            _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
-
-            addPropertyToOperationClient(_operationClient,
-                org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,
-                "&");
-
-            // create SOAP envelope with that payload
-            org.apache.axiom.soap.SOAPEnvelope env = null;
-
-            env = toEnvelope(getFactory(_operationClient.getOptions()
-                                                        .getSoapVersionURI()),
-                    getSections2,
-                    optimizeContent(
-                        new javax.xml.namespace.QName(
-                            "http://ws.apache.org/axis2", "getSections")),
-                    new javax.xml.namespace.QName(
-                        "http://ws.apache.org/axis2", "getSections"));
-
-            //adding SOAP soap_headers
-            _serviceClient.addHeadersToEnvelope(env);
-            // set the message context with that soap envelope
-            _messageContext.setEnvelope(env);
-
-            // add the message contxt to the operation client
-            _operationClient.addMessageContext(_messageContext);
-
-            //execute the operation client
-            _operationClient.execute(true);
-
-            org.apache.axis2.context.MessageContext _returnMessageContext = _operationClient.getMessageContext(org.apache.axis2.wsdl.WSDLConstants.MESSAGE_LABEL_IN_VALUE);
-            org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
-
-            java.lang.Object object = fromOM(_returnEnv.getBody()
-                                                       .getFirstElement(),
-                    org.apache.ws.axis2.CustomServiceStub.GetSectionsResponse.class);
-
-            return (org.apache.ws.axis2.CustomServiceStub.GetSectionsResponse) object;
-        } catch (org.apache.axis2.AxisFault f) {
-            org.apache.axiom.om.OMElement faultElt = f.getDetail();
-
-            if (faultElt != null) {
-                if (faultExceptionNameMap.containsKey(
-                            new org.apache.axis2.client.FaultMapKey(
-                                faultElt.getQName(), "getSections"))) {
-                    //make the fault by reflection
-                    try {
-                        java.lang.String exceptionClassName = (java.lang.String) faultExceptionClassNameMap.get(new org.apache.axis2.client.FaultMapKey(
-                                    faultElt.getQName(), "getSections"));
-                        java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
-                        java.lang.reflect.Constructor constructor = exceptionClass.getConstructor(java.lang.String.class);
-                        java.lang.Exception ex = (java.lang.Exception) constructor.newInstance(f.getMessage());
-
-                        //message class
-                        java.lang.String messageClassName = (java.lang.String) faultMessageMap.get(new org.apache.axis2.client.FaultMapKey(
-                                    faultElt.getQName(), "getSections"));
-                        java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
-                        java.lang.Object messageObject = fromOM(faultElt,
-                                messageClass);
-                        java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
-                                new java.lang.Class[] { messageClass });
-                        m.invoke(ex, new java.lang.Object[] { messageObject });
-
-                        throw new java.rmi.RemoteException(ex.getMessage(), ex);
-                    } catch (java.lang.ClassCastException e) {
-                        // we cannot intantiate the class - throw the original Axis fault
-                        throw f;
-                    } catch (java.lang.ClassNotFoundException e) {
-                        // we cannot intantiate the class - throw the original Axis fault
-                        throw f;
-                    } catch (java.lang.NoSuchMethodException e) {
-                        // we cannot intantiate the class - throw the original Axis fault
-                        throw f;
-                    } catch (java.lang.reflect.InvocationTargetException e) {
-                        // we cannot intantiate the class - throw the original Axis fault
-                        throw f;
-                    } catch (java.lang.IllegalAccessException e) {
-                        // we cannot intantiate the class - throw the original Axis fault
-                        throw f;
-                    } catch (java.lang.InstantiationException e) {
-                        // we cannot intantiate the class - throw the original Axis fault
-                        throw f;
-                    }
-                } else {
-                    throw f;
-                }
-            } else {
-                throw f;
-            }
-        } finally {
-            if (_messageContext.getTransportOut() != null) {
-                _messageContext.getTransportOut().getSender()
-                               .cleanup(_messageContext);
-            }
-        }
-    }
-
-    /**
-     * Auto generated method signature for Asynchronous Invocations
-     *
-     * @see org.apache.ws.axis2.CustomService#startgetSections
-     * @param getSections2
-     */
-    public void startgetSections(
-        org.apache.ws.axis2.CustomServiceStub.GetSections getSections2,
-        final org.apache.ws.axis2.CustomServiceCallbackHandler callback)
-        throws java.rmi.RemoteException {
-        org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[2].getName());
-        _operationClient.getOptions().setAction("urn:getSections");
-        _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
-
-        addPropertyToOperationClient(_operationClient,
-            org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,
-            "&");
-
-        // create SOAP envelope with that payload
-        org.apache.axiom.soap.SOAPEnvelope env = null;
-        final org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
-
-        //Style is Doc.
-        env = toEnvelope(getFactory(_operationClient.getOptions()
-                                                    .getSoapVersionURI()),
-                getSections2,
-                optimizeContent(
-                    new javax.xml.namespace.QName(
-                        "http://ws.apache.org/axis2", "getSections")),
-                new javax.xml.namespace.QName("http://ws.apache.org/axis2",
-                    "getSections"));
-
-        // adding SOAP soap_headers
-        _serviceClient.addHeadersToEnvelope(env);
-        // create message context with that soap envelope
-        _messageContext.setEnvelope(env);
-
-        // add the message context to the operation client
-        _operationClient.addMessageContext(_messageContext);
-
-        _operationClient.setCallback(new org.apache.axis2.client.async.AxisCallback() {
-                public void onMessage(
-                    org.apache.axis2.context.MessageContext resultContext) {
-                    try {
-                        org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
-
-                        java.lang.Object object = fromOM(resultEnv.getBody()
-                                                                  .getFirstElement(),
-                                org.apache.ws.axis2.CustomServiceStub.GetSectionsResponse.class);
-                        callback.receiveResultgetSections((org.apache.ws.axis2.CustomServiceStub.GetSectionsResponse) object);
-                    } catch (org.apache.axis2.AxisFault e) {
-                        callback.receiveErrorgetSections(e);
-                    }
-                }
-
-                public void onError(java.lang.Exception error) {
-                    if (error instanceof org.apache.axis2.AxisFault) {
-                        org.apache.axis2.AxisFault f = (org.apache.axis2.AxisFault) error;
-                        org.apache.axiom.om.OMElement faultElt = f.getDetail();
-
-                        if (faultElt != null) {
-                            if (faultExceptionNameMap.containsKey(
-                                        new org.apache.axis2.client.FaultMapKey(
-                                            faultElt.getQName(), "getSections"))) {
-                                //make the fault by reflection
-                                try {
-                                    java.lang.String exceptionClassName = (java.lang.String) faultExceptionClassNameMap.get(new org.apache.axis2.client.FaultMapKey(
-                                                faultElt.getQName(),
-                                                "getSections"));
-                                    java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
-                                    java.lang.reflect.Constructor constructor = exceptionClass.getConstructor(java.lang.String.class);
-                                    java.lang.Exception ex = (java.lang.Exception) constructor.newInstance(f.getMessage());
-
-                                    //message class
-                                    java.lang.String messageClassName = (java.lang.String) faultMessageMap.get(new org.apache.axis2.client.FaultMapKey(
-                                                faultElt.getQName(),
-                                                "getSections"));
-                                    java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
-                                    java.lang.Object messageObject = fromOM(faultElt,
-                                            messageClass);
-                                    java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
-                                            new java.lang.Class[] { messageClass });
-                                    m.invoke(ex,
-                                        new java.lang.Object[] { messageObject });
-
-                                    callback.receiveErrorgetSections(new java.rmi.RemoteException(
-                                            ex.getMessage(), ex));
-                                } catch (java.lang.ClassCastException e) {
-                                    // we cannot intantiate the class - throw the original Axis fault
-                                    callback.receiveErrorgetSections(f);
-                                } catch (java.lang.ClassNotFoundException e) {
-                                    // we cannot intantiate the class - throw the original Axis fault
-                                    callback.receiveErrorgetSections(f);
-                                } catch (java.lang.NoSuchMethodException e) {
-                                    // we cannot intantiate the class - throw the original Axis fault
-                                    callback.receiveErrorgetSections(f);
-                                } catch (java.lang.reflect.InvocationTargetException e) {
-                                    // we cannot intantiate the class - throw the original Axis fault
-                                    callback.receiveErrorgetSections(f);
-                                } catch (java.lang.IllegalAccessException e) {
-                                    // we cannot intantiate the class - throw the original Axis fault
-                                    callback.receiveErrorgetSections(f);
-                                } catch (java.lang.InstantiationException e) {
-                                    // we cannot intantiate the class - throw the original Axis fault
-                                    callback.receiveErrorgetSections(f);
-                                } catch (org.apache.axis2.AxisFault e) {
-                                    // we cannot intantiate the class - throw the original Axis fault
-                                    callback.receiveErrorgetSections(f);
-                                }
-                            } else {
-                                callback.receiveErrorgetSections(f);
-                            }
-                        } else {
-                            callback.receiveErrorgetSections(f);
-                        }
-                    } else {
-                        callback.receiveErrorgetSections(error);
-                    }
-                }
-
-                public void onFault(
-                    org.apache.axis2.context.MessageContext faultContext) {
-                    org.apache.axis2.AxisFault fault = org.apache.axis2.util.Utils.getInboundFaultFromMessageContext(faultContext);
-                    onError(fault);
-                }
-
-                public void onComplete() {
-                    try {
-                        _messageContext.getTransportOut().getSender()
-                                       .cleanup(_messageContext);
-                    } catch (org.apache.axis2.AxisFault axisFault) {
-                        callback.receiveErrorgetSections(axisFault);
-                    }
-                }
-            });
-
-        org.apache.axis2.util.CallbackReceiver _callbackReceiver = null;
-
-        if ((_operations[2].getMessageReceiver() == null) &&
-                _operationClient.getOptions().isUseSeparateListener()) {
-            _callbackReceiver = new org.apache.axis2.util.CallbackReceiver();
-            _operations[2].setMessageReceiver(_callbackReceiver);
-        }
-
-        //execute the operation client
-        _operationClient.execute(false);
-    }
-
-    /**
-     * Auto generated method signature
-     *
      */
     public void addSubsection(
-        org.apache.ws.axis2.CustomServiceStub.AddSubsection addSubsection4)
+        org.apache.ws.axis2.CustomServiceStub.AddSubsection addSubsection2)
         throws java.rmi.RemoteException {
         org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
 
-        org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[3].getName());
+        org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[2].getName());
         _operationClient.getOptions().setAction("urn:addSubsection");
         _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -529,7 +271,7 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
         //Style is Doc.
         env = toEnvelope(getFactory(_operationClient.getOptions()
                                                     .getSoapVersionURI()),
-                addSubsection4,
+                addSubsection2,
                 optimizeContent(
                     new javax.xml.namespace.QName(
                         "http://ws.apache.org/axis2", "addSubsection")),
@@ -559,11 +301,11 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
      *
      */
     public void updateSubsection(
-        org.apache.ws.axis2.CustomServiceStub.UpdateSubsection updateSubsection5)
+        org.apache.ws.axis2.CustomServiceStub.UpdateSubsection updateSubsection3)
         throws java.rmi.RemoteException {
         org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
 
-        org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[4].getName());
+        org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[3].getName());
         _operationClient.getOptions().setAction("urn:updateSubsection");
         _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -576,7 +318,7 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
         //Style is Doc.
         env = toEnvelope(getFactory(_operationClient.getOptions()
                                                     .getSoapVersionURI()),
-                updateSubsection5,
+                updateSubsection3,
                 optimizeContent(
                     new javax.xml.namespace.QName(
                         "http://ws.apache.org/axis2", "updateSubsection")),
@@ -605,15 +347,15 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
      * Auto generated method signature
      *
      * @see org.apache.ws.axis2.CustomService#getSubsection
-     * @param getSubsection6
+     * @param getSubsection4
      */
     public org.apache.ws.axis2.CustomServiceStub.GetSubsectionResponse getSubsection(
-        org.apache.ws.axis2.CustomServiceStub.GetSubsection getSubsection6)
+        org.apache.ws.axis2.CustomServiceStub.GetSubsection getSubsection4)
         throws java.rmi.RemoteException {
         org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
 
         try {
-            org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[5].getName());
+            org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[4].getName());
             _operationClient.getOptions().setAction("urn:getSubsection");
             _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -626,7 +368,7 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
 
             env = toEnvelope(getFactory(_operationClient.getOptions()
                                                         .getSoapVersionURI()),
-                    getSubsection6,
+                    getSubsection4,
                     optimizeContent(
                         new javax.xml.namespace.QName(
                             "http://ws.apache.org/axis2", "getSubsection")),
@@ -715,13 +457,13 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
      * Auto generated method signature for Asynchronous Invocations
      *
      * @see org.apache.ws.axis2.CustomService#startgetSubsection
-     * @param getSubsection6
+     * @param getSubsection4
      */
     public void startgetSubsection(
-        org.apache.ws.axis2.CustomServiceStub.GetSubsection getSubsection6,
+        org.apache.ws.axis2.CustomServiceStub.GetSubsection getSubsection4,
         final org.apache.ws.axis2.CustomServiceCallbackHandler callback)
         throws java.rmi.RemoteException {
-        org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[5].getName());
+        org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[4].getName());
         _operationClient.getOptions().setAction("urn:getSubsection");
         _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
@@ -736,7 +478,7 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
         //Style is Doc.
         env = toEnvelope(getFactory(_operationClient.getOptions()
                                                     .getSoapVersionURI()),
-                getSubsection6,
+                getSubsection4,
                 optimizeContent(
                     new javax.xml.namespace.QName(
                         "http://ws.apache.org/axis2", "getSubsection")),
@@ -849,6 +591,265 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
 
         org.apache.axis2.util.CallbackReceiver _callbackReceiver = null;
 
+        if ((_operations[4].getMessageReceiver() == null) &&
+                _operationClient.getOptions().isUseSeparateListener()) {
+            _callbackReceiver = new org.apache.axis2.util.CallbackReceiver();
+            _operations[4].setMessageReceiver(_callbackReceiver);
+        }
+
+        //execute the operation client
+        _operationClient.execute(false);
+    }
+
+    /**
+     * Auto generated method signature
+     *
+     * @see org.apache.ws.axis2.CustomService#getJsRefference
+     * @param getJsRefference6
+     */
+    public org.apache.ws.axis2.CustomServiceStub.GetJsRefferenceResponse getJsRefference(
+        org.apache.ws.axis2.CustomServiceStub.GetJsRefference getJsRefference6)
+        throws java.rmi.RemoteException {
+        org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+
+        try {
+            org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[5].getName());
+            _operationClient.getOptions().setAction("urn:getJsRefference");
+            _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
+
+            addPropertyToOperationClient(_operationClient,
+                org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,
+                "&");
+
+            // create SOAP envelope with that payload
+            org.apache.axiom.soap.SOAPEnvelope env = null;
+
+            env = toEnvelope(getFactory(_operationClient.getOptions()
+                                                        .getSoapVersionURI()),
+                    getJsRefference6,
+                    optimizeContent(
+                        new javax.xml.namespace.QName(
+                            "http://ws.apache.org/axis2", "getJsRefference")),
+                    new javax.xml.namespace.QName(
+                        "http://ws.apache.org/axis2", "getJsRefference"));
+
+            //adding SOAP soap_headers
+            _serviceClient.addHeadersToEnvelope(env);
+            // set the message context with that soap envelope
+            _messageContext.setEnvelope(env);
+
+            // add the message contxt to the operation client
+            _operationClient.addMessageContext(_messageContext);
+
+            //execute the operation client
+            _operationClient.execute(true);
+
+            org.apache.axis2.context.MessageContext _returnMessageContext = _operationClient.getMessageContext(org.apache.axis2.wsdl.WSDLConstants.MESSAGE_LABEL_IN_VALUE);
+            org.apache.axiom.soap.SOAPEnvelope _returnEnv = _returnMessageContext.getEnvelope();
+
+            java.lang.Object object = fromOM(_returnEnv.getBody()
+                                                       .getFirstElement(),
+                    org.apache.ws.axis2.CustomServiceStub.GetJsRefferenceResponse.class);
+
+            return (org.apache.ws.axis2.CustomServiceStub.GetJsRefferenceResponse) object;
+        } catch (org.apache.axis2.AxisFault f) {
+            org.apache.axiom.om.OMElement faultElt = f.getDetail();
+
+            if (faultElt != null) {
+                if (faultExceptionNameMap.containsKey(
+                            new org.apache.axis2.client.FaultMapKey(
+                                faultElt.getQName(), "getJsRefference"))) {
+                    //make the fault by reflection
+                    try {
+                        java.lang.String exceptionClassName = (java.lang.String) faultExceptionClassNameMap.get(new org.apache.axis2.client.FaultMapKey(
+                                    faultElt.getQName(), "getJsRefference"));
+                        java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
+                        java.lang.reflect.Constructor constructor = exceptionClass.getConstructor(java.lang.String.class);
+                        java.lang.Exception ex = (java.lang.Exception) constructor.newInstance(f.getMessage());
+
+                        //message class
+                        java.lang.String messageClassName = (java.lang.String) faultMessageMap.get(new org.apache.axis2.client.FaultMapKey(
+                                    faultElt.getQName(), "getJsRefference"));
+                        java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
+                        java.lang.Object messageObject = fromOM(faultElt,
+                                messageClass);
+                        java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
+                                new java.lang.Class[] { messageClass });
+                        m.invoke(ex, new java.lang.Object[] { messageObject });
+
+                        throw new java.rmi.RemoteException(ex.getMessage(), ex);
+                    } catch (java.lang.ClassCastException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    } catch (java.lang.ClassNotFoundException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    } catch (java.lang.NoSuchMethodException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    } catch (java.lang.reflect.InvocationTargetException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    } catch (java.lang.IllegalAccessException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    } catch (java.lang.InstantiationException e) {
+                        // we cannot intantiate the class - throw the original Axis fault
+                        throw f;
+                    }
+                } else {
+                    throw f;
+                }
+            } else {
+                throw f;
+            }
+        } finally {
+            if (_messageContext.getTransportOut() != null) {
+                _messageContext.getTransportOut().getSender()
+                               .cleanup(_messageContext);
+            }
+        }
+    }
+
+    /**
+     * Auto generated method signature for Asynchronous Invocations
+     *
+     * @see org.apache.ws.axis2.CustomService#startgetJsRefference
+     * @param getJsRefference6
+     */
+    public void startgetJsRefference(
+        org.apache.ws.axis2.CustomServiceStub.GetJsRefference getJsRefference6,
+        final org.apache.ws.axis2.CustomServiceCallbackHandler callback)
+        throws java.rmi.RemoteException {
+        org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[5].getName());
+        _operationClient.getOptions().setAction("urn:getJsRefference");
+        _operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
+
+        addPropertyToOperationClient(_operationClient,
+            org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,
+            "&");
+
+        // create SOAP envelope with that payload
+        org.apache.axiom.soap.SOAPEnvelope env = null;
+        final org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+
+        //Style is Doc.
+        env = toEnvelope(getFactory(_operationClient.getOptions()
+                                                    .getSoapVersionURI()),
+                getJsRefference6,
+                optimizeContent(
+                    new javax.xml.namespace.QName(
+                        "http://ws.apache.org/axis2", "getJsRefference")),
+                new javax.xml.namespace.QName("http://ws.apache.org/axis2",
+                    "getJsRefference"));
+
+        // adding SOAP soap_headers
+        _serviceClient.addHeadersToEnvelope(env);
+        // create message context with that soap envelope
+        _messageContext.setEnvelope(env);
+
+        // add the message context to the operation client
+        _operationClient.addMessageContext(_messageContext);
+
+        _operationClient.setCallback(new org.apache.axis2.client.async.AxisCallback() {
+                public void onMessage(
+                    org.apache.axis2.context.MessageContext resultContext) {
+                    try {
+                        org.apache.axiom.soap.SOAPEnvelope resultEnv = resultContext.getEnvelope();
+
+                        java.lang.Object object = fromOM(resultEnv.getBody()
+                                                                  .getFirstElement(),
+                                org.apache.ws.axis2.CustomServiceStub.GetJsRefferenceResponse.class);
+                        callback.receiveResultgetJsRefference((org.apache.ws.axis2.CustomServiceStub.GetJsRefferenceResponse) object);
+                    } catch (org.apache.axis2.AxisFault e) {
+                        callback.receiveErrorgetJsRefference(e);
+                    }
+                }
+
+                public void onError(java.lang.Exception error) {
+                    if (error instanceof org.apache.axis2.AxisFault) {
+                        org.apache.axis2.AxisFault f = (org.apache.axis2.AxisFault) error;
+                        org.apache.axiom.om.OMElement faultElt = f.getDetail();
+
+                        if (faultElt != null) {
+                            if (faultExceptionNameMap.containsKey(
+                                        new org.apache.axis2.client.FaultMapKey(
+                                            faultElt.getQName(),
+                                            "getJsRefference"))) {
+                                //make the fault by reflection
+                                try {
+                                    java.lang.String exceptionClassName = (java.lang.String) faultExceptionClassNameMap.get(new org.apache.axis2.client.FaultMapKey(
+                                                faultElt.getQName(),
+                                                "getJsRefference"));
+                                    java.lang.Class exceptionClass = java.lang.Class.forName(exceptionClassName);
+                                    java.lang.reflect.Constructor constructor = exceptionClass.getConstructor(java.lang.String.class);
+                                    java.lang.Exception ex = (java.lang.Exception) constructor.newInstance(f.getMessage());
+
+                                    //message class
+                                    java.lang.String messageClassName = (java.lang.String) faultMessageMap.get(new org.apache.axis2.client.FaultMapKey(
+                                                faultElt.getQName(),
+                                                "getJsRefference"));
+                                    java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
+                                    java.lang.Object messageObject = fromOM(faultElt,
+                                            messageClass);
+                                    java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
+                                            new java.lang.Class[] { messageClass });
+                                    m.invoke(ex,
+                                        new java.lang.Object[] { messageObject });
+
+                                    callback.receiveErrorgetJsRefference(new java.rmi.RemoteException(
+                                            ex.getMessage(), ex));
+                                } catch (java.lang.ClassCastException e) {
+                                    // we cannot intantiate the class - throw the original Axis fault
+                                    callback.receiveErrorgetJsRefference(f);
+                                } catch (java.lang.ClassNotFoundException e) {
+                                    // we cannot intantiate the class - throw the original Axis fault
+                                    callback.receiveErrorgetJsRefference(f);
+                                } catch (java.lang.NoSuchMethodException e) {
+                                    // we cannot intantiate the class - throw the original Axis fault
+                                    callback.receiveErrorgetJsRefference(f);
+                                } catch (java.lang.reflect.InvocationTargetException e) {
+                                    // we cannot intantiate the class - throw the original Axis fault
+                                    callback.receiveErrorgetJsRefference(f);
+                                } catch (java.lang.IllegalAccessException e) {
+                                    // we cannot intantiate the class - throw the original Axis fault
+                                    callback.receiveErrorgetJsRefference(f);
+                                } catch (java.lang.InstantiationException e) {
+                                    // we cannot intantiate the class - throw the original Axis fault
+                                    callback.receiveErrorgetJsRefference(f);
+                                } catch (org.apache.axis2.AxisFault e) {
+                                    // we cannot intantiate the class - throw the original Axis fault
+                                    callback.receiveErrorgetJsRefference(f);
+                                }
+                            } else {
+                                callback.receiveErrorgetJsRefference(f);
+                            }
+                        } else {
+                            callback.receiveErrorgetJsRefference(f);
+                        }
+                    } else {
+                        callback.receiveErrorgetJsRefference(error);
+                    }
+                }
+
+                public void onFault(
+                    org.apache.axis2.context.MessageContext faultContext) {
+                    org.apache.axis2.AxisFault fault = org.apache.axis2.util.Utils.getInboundFaultFromMessageContext(faultContext);
+                    onError(fault);
+                }
+
+                public void onComplete() {
+                    try {
+                        _messageContext.getTransportOut().getSender()
+                                       .cleanup(_messageContext);
+                    } catch (org.apache.axis2.AxisFault axisFault) {
+                        callback.receiveErrorgetJsRefference(axisFault);
+                    }
+                }
+            });
+
+        org.apache.axis2.util.CallbackReceiver _callbackReceiver = null;
+
         if ((_operations[5].getMessageReceiver() == null) &&
                 _operationClient.getOptions().isUseSeparateListener()) {
             _callbackReceiver = new org.apache.axis2.util.CallbackReceiver();
@@ -889,28 +890,6 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
         boolean optimizeContent) throws org.apache.axis2.AxisFault {
         try {
             return param.getOMElement(org.apache.ws.axis2.CustomServiceStub.AddSection.MY_QNAME,
-                org.apache.axiom.om.OMAbstractFactory.getOMFactory());
-        } catch (org.apache.axis2.databinding.ADBException e) {
-            throw org.apache.axis2.AxisFault.makeFault(e);
-        }
-    }
-
-    private org.apache.axiom.om.OMElement toOM(
-        org.apache.ws.axis2.CustomServiceStub.GetSections param,
-        boolean optimizeContent) throws org.apache.axis2.AxisFault {
-        try {
-            return param.getOMElement(org.apache.ws.axis2.CustomServiceStub.GetSections.MY_QNAME,
-                org.apache.axiom.om.OMAbstractFactory.getOMFactory());
-        } catch (org.apache.axis2.databinding.ADBException e) {
-            throw org.apache.axis2.AxisFault.makeFault(e);
-        }
-    }
-
-    private org.apache.axiom.om.OMElement toOM(
-        org.apache.ws.axis2.CustomServiceStub.GetSectionsResponse param,
-        boolean optimizeContent) throws org.apache.axis2.AxisFault {
-        try {
-            return param.getOMElement(org.apache.ws.axis2.CustomServiceStub.GetSectionsResponse.MY_QNAME,
                 org.apache.axiom.om.OMAbstractFactory.getOMFactory());
         } catch (org.apache.axis2.databinding.ADBException e) {
             throw org.apache.axis2.AxisFault.makeFault(e);
@@ -961,6 +940,28 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
         }
     }
 
+    private org.apache.axiom.om.OMElement toOM(
+        org.apache.ws.axis2.CustomServiceStub.GetJsRefference param,
+        boolean optimizeContent) throws org.apache.axis2.AxisFault {
+        try {
+            return param.getOMElement(org.apache.ws.axis2.CustomServiceStub.GetJsRefference.MY_QNAME,
+                org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+        } catch (org.apache.axis2.databinding.ADBException e) {
+            throw org.apache.axis2.AxisFault.makeFault(e);
+        }
+    }
+
+    private org.apache.axiom.om.OMElement toOM(
+        org.apache.ws.axis2.CustomServiceStub.GetJsRefferenceResponse param,
+        boolean optimizeContent) throws org.apache.axis2.AxisFault {
+        try {
+            return param.getOMElement(org.apache.ws.axis2.CustomServiceStub.GetJsRefferenceResponse.MY_QNAME,
+                org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+        } catch (org.apache.axis2.databinding.ADBException e) {
+            throw org.apache.axis2.AxisFault.makeFault(e);
+        }
+    }
+
     private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
         org.apache.axiom.soap.SOAPFactory factory,
         org.apache.ws.axis2.CustomServiceStub.DeleteSubsection param,
@@ -990,25 +991,6 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
             emptyEnvelope.getBody()
                          .addChild(param.getOMElement(
                     org.apache.ws.axis2.CustomServiceStub.AddSection.MY_QNAME,
-                    factory));
-
-            return emptyEnvelope;
-        } catch (org.apache.axis2.databinding.ADBException e) {
-            throw org.apache.axis2.AxisFault.makeFault(e);
-        }
-    }
-
-    /* methods to provide back word compatibility */
-    private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
-        org.apache.axiom.soap.SOAPFactory factory,
-        org.apache.ws.axis2.CustomServiceStub.GetSections param,
-        boolean optimizeContent, javax.xml.namespace.QName elementQName)
-        throws org.apache.axis2.AxisFault {
-        try {
-            org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
-            emptyEnvelope.getBody()
-                         .addChild(param.getOMElement(
-                    org.apache.ws.axis2.CustomServiceStub.GetSections.MY_QNAME,
                     factory));
 
             return emptyEnvelope;
@@ -1075,6 +1057,25 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
     }
 
     /* methods to provide back word compatibility */
+    private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
+        org.apache.axiom.soap.SOAPFactory factory,
+        org.apache.ws.axis2.CustomServiceStub.GetJsRefference param,
+        boolean optimizeContent, javax.xml.namespace.QName elementQName)
+        throws org.apache.axis2.AxisFault {
+        try {
+            org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
+            emptyEnvelope.getBody()
+                         .addChild(param.getOMElement(
+                    org.apache.ws.axis2.CustomServiceStub.GetJsRefference.MY_QNAME,
+                    factory));
+
+            return emptyEnvelope;
+        } catch (org.apache.axis2.databinding.ADBException e) {
+            throw org.apache.axis2.AxisFault.makeFault(e);
+        }
+    }
+
+    /* methods to provide back word compatibility */
 
     /**
      *  get the default envelope
@@ -1102,14 +1103,14 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
                 return org.apache.ws.axis2.CustomServiceStub.DeleteSubsection.Factory.parse(param.getXMLStreamReaderWithoutCaching());
             }
 
-            if (org.apache.ws.axis2.CustomServiceStub.GetSections.class.equals(
+            if (org.apache.ws.axis2.CustomServiceStub.GetJsRefference.class.equals(
                         type)) {
-                return org.apache.ws.axis2.CustomServiceStub.GetSections.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                return org.apache.ws.axis2.CustomServiceStub.GetJsRefference.Factory.parse(param.getXMLStreamReaderWithoutCaching());
             }
 
-            if (org.apache.ws.axis2.CustomServiceStub.GetSectionsResponse.class.equals(
+            if (org.apache.ws.axis2.CustomServiceStub.GetJsRefferenceResponse.class.equals(
                         type)) {
-                return org.apache.ws.axis2.CustomServiceStub.GetSectionsResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                return org.apache.ws.axis2.CustomServiceStub.GetJsRefferenceResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
             }
 
             if (org.apache.ws.axis2.CustomServiceStub.GetSubsection.class.equals(
@@ -1134,9 +1135,9 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
     }
 
     //http://localhost:8080/axis2/services/CustomService.CustomServiceHttpSoap12Endpoint/
-    public static class GetSections implements org.apache.axis2.databinding.ADBBean {
+    public static class GetJsRefference implements org.apache.axis2.databinding.ADBBean {
         public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://ws.apache.org/axis2",
-                "getSections", "ns2");
+                "getJsRefference", "ns2");
 
         /**
          *
@@ -1179,11 +1180,11 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
                         (namespacePrefix.trim().length() > 0)) {
                     writeAttribute("xsi",
                         "http://www.w3.org/2001/XMLSchema-instance", "type",
-                        namespacePrefix + ":getSections", xmlWriter);
+                        namespacePrefix + ":getJsRefference", xmlWriter);
                 } else {
                     writeAttribute("xsi",
                         "http://www.w3.org/2001/XMLSchema-instance", "type",
-                        "getSections", xmlWriter);
+                        "getJsRefference", xmlWriter);
                 }
             }
 
@@ -1409,10 +1410,10 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
              * Postcondition: If this object is an element, the reader is positioned at its end element
              *                If this object is a complex type, the reader is positioned at the end element of its outer element
              */
-            public static GetSections parse(
+            public static GetJsRefference parse(
                 javax.xml.stream.XMLStreamReader reader)
                 throws java.lang.Exception {
-                GetSections object = new GetSections();
+                GetJsRefference object = new GetJsRefference();
 
                 int event;
                 javax.xml.namespace.QName currentQName = null;
@@ -1445,12 +1446,12 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
                             java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
                                         ":") + 1);
 
-                            if (!"getSections".equals(type)) {
+                            if (!"getJsRefference".equals(type)) {
                                 //find namespace for the prefix
                                 java.lang.String nsUri = reader.getNamespaceContext()
                                                                .getNamespaceURI(nsPrefix);
 
-                                return (GetSections) ExtensionMapper.getTypeObject(nsUri,
+                                return (GetJsRefference) ExtensionMapper.getTypeObject(nsUri,
                                     type, reader);
                             }
                         }
@@ -1461,6 +1462,426 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
                     java.util.Vector handledAttributes = new java.util.Vector();
 
                     reader.next();
+
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    if (reader.isStartElement()) {
+                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        throw new org.apache.axis2.databinding.ADBException(
+                            "Unexpected subelement " + reader.getName());
+                    }
+                } catch (javax.xml.stream.XMLStreamException e) {
+                    throw new java.lang.Exception(e);
+                }
+
+                return object;
+            }
+        } //end of factory class
+    }
+
+    public static class GetJsRefferenceResponse implements org.apache.axis2.databinding.ADBBean {
+        public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://ws.apache.org/axis2",
+                "getJsRefferenceResponse", "ns2");
+
+        /**
+         * field for _return
+         */
+        protected JsRefference local_return;
+
+        /*  This tracker boolean wil be used to detect whether the user called the set method
+         *   for this attribute. It will be used to determine whether to include this field
+         *   in the serialized XML
+         */
+        protected boolean local_returnTracker = false;
+
+        public boolean is_returnSpecified() {
+            return local_returnTracker;
+        }
+
+        /**
+         * Auto generated getter method
+         * @return JsRefference
+         */
+        public JsRefference get_return() {
+            return local_return;
+        }
+
+        /**
+         * Auto generated setter method
+         * @param param _return
+         */
+        public void set_return(JsRefference param) {
+            local_returnTracker = true;
+
+            this.local_return = param;
+        }
+
+        /**
+         *
+         * @param parentQName
+         * @param factory
+         * @return org.apache.axiom.om.OMElement
+         */
+        public org.apache.axiom.om.OMElement getOMElement(
+            final javax.xml.namespace.QName parentQName,
+            final org.apache.axiom.om.OMFactory factory)
+            throws org.apache.axis2.databinding.ADBException {
+            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
+                    this, MY_QNAME));
+        }
+
+        public void serialize(final javax.xml.namespace.QName parentQName,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException,
+                org.apache.axis2.databinding.ADBException {
+            serialize(parentQName, xmlWriter, false);
+        }
+
+        public void serialize(final javax.xml.namespace.QName parentQName,
+            javax.xml.stream.XMLStreamWriter xmlWriter, boolean serializeType)
+            throws javax.xml.stream.XMLStreamException,
+                org.apache.axis2.databinding.ADBException {
+            java.lang.String prefix = null;
+            java.lang.String namespace = null;
+
+            prefix = parentQName.getPrefix();
+            namespace = parentQName.getNamespaceURI();
+            writeStartElement(prefix, namespace, parentQName.getLocalPart(),
+                xmlWriter);
+
+            if (serializeType) {
+                java.lang.String namespacePrefix = registerPrefix(xmlWriter,
+                        "http://ws.apache.org/axis2");
+
+                if ((namespacePrefix != null) &&
+                        (namespacePrefix.trim().length() > 0)) {
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "type",
+                        namespacePrefix + ":getJsRefferenceResponse", xmlWriter);
+                } else {
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "type",
+                        "getJsRefferenceResponse", xmlWriter);
+                }
+            }
+
+            if (local_returnTracker) {
+                if (local_return == null) {
+                    writeStartElement(null, "http://ws.apache.org/axis2",
+                        "return", xmlWriter);
+
+                    // write the nil attribute
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "nil",
+                        "1", xmlWriter);
+                    xmlWriter.writeEndElement();
+                } else {
+                    local_return.serialize(new javax.xml.namespace.QName(
+                            "http://ws.apache.org/axis2", "return"), xmlWriter);
+                }
+            }
+
+            xmlWriter.writeEndElement();
+        }
+
+        private static java.lang.String generatePrefix(
+            java.lang.String namespace) {
+            if (namespace.equals("http://ws.apache.org/axis2")) {
+                return "ns2";
+            }
+
+            return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+        }
+
+        /**
+         * Utility method to write an element start tag.
+         */
+        private void writeStartElement(java.lang.String prefix,
+            java.lang.String namespace, java.lang.String localPart,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
+
+            if (writerPrefix != null) {
+                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+            } else {
+                if (namespace.length() == 0) {
+                    prefix = "";
+                } else if (prefix == null) {
+                    prefix = generatePrefix(namespace);
+                }
+
+                xmlWriter.writeStartElement(prefix, localPart, namespace);
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+            }
+        }
+
+        /**
+         * Util method to write an attribute with the ns prefix
+         */
+        private void writeAttribute(java.lang.String prefix,
+            java.lang.String namespace, java.lang.String attName,
+            java.lang.String attValue,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
+
+            if (writerPrefix != null) {
+                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
+                    attValue);
+            } else {
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
+            }
+        }
+
+        /**
+         * Util method to write an attribute without the ns prefix
+         */
+        private void writeAttribute(java.lang.String namespace,
+            java.lang.String attName, java.lang.String attValue,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            if (namespace.equals("")) {
+                xmlWriter.writeAttribute(attName, attValue);
+            } else {
+                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
+                    namespace, attName, attValue);
+            }
+        }
+
+        /**
+         * Util method to write an attribute without the ns prefix
+         */
+        private void writeQNameAttribute(java.lang.String namespace,
+            java.lang.String attName, javax.xml.namespace.QName qname,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String attributeNamespace = qname.getNamespaceURI();
+            java.lang.String attributePrefix = xmlWriter.getPrefix(attributeNamespace);
+
+            if (attributePrefix == null) {
+                attributePrefix = registerPrefix(xmlWriter, attributeNamespace);
+            }
+
+            java.lang.String attributeValue;
+
+            if (attributePrefix.trim().length() > 0) {
+                attributeValue = attributePrefix + ":" + qname.getLocalPart();
+            } else {
+                attributeValue = qname.getLocalPart();
+            }
+
+            if (namespace.equals("")) {
+                xmlWriter.writeAttribute(attName, attributeValue);
+            } else {
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
+                    attributeValue);
+            }
+        }
+
+        /**
+         *  method to handle Qnames
+         */
+        private void writeQName(javax.xml.namespace.QName qname,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String namespaceURI = qname.getNamespaceURI();
+
+            if (namespaceURI != null) {
+                java.lang.String prefix = xmlWriter.getPrefix(namespaceURI);
+
+                if (prefix == null) {
+                    prefix = generatePrefix(namespaceURI);
+                    xmlWriter.writeNamespace(prefix, namespaceURI);
+                    xmlWriter.setPrefix(prefix, namespaceURI);
+                }
+
+                if (prefix.trim().length() > 0) {
+                    xmlWriter.writeCharacters(prefix + ":" +
+                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            qname));
+                } else {
+                    // i.e this is the default namespace
+                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            qname));
+                }
+            } else {
+                xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        qname));
+            }
+        }
+
+        private void writeQNames(javax.xml.namespace.QName[] qnames,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            if (qnames != null) {
+                // we have to store this data until last moment since it is not possible to write any
+                // namespace data after writing the charactor data
+                java.lang.StringBuffer stringToWrite = new java.lang.StringBuffer();
+                java.lang.String namespaceURI = null;
+                java.lang.String prefix = null;
+
+                for (int i = 0; i < qnames.length; i++) {
+                    if (i > 0) {
+                        stringToWrite.append(" ");
+                    }
+
+                    namespaceURI = qnames[i].getNamespaceURI();
+
+                    if (namespaceURI != null) {
+                        prefix = xmlWriter.getPrefix(namespaceURI);
+
+                        if ((prefix == null) || (prefix.length() == 0)) {
+                            prefix = generatePrefix(namespaceURI);
+                            xmlWriter.writeNamespace(prefix, namespaceURI);
+                            xmlWriter.setPrefix(prefix, namespaceURI);
+                        }
+
+                        if (prefix.trim().length() > 0) {
+                            stringToWrite.append(prefix).append(":")
+                                         .append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                    qnames[i]));
+                        } else {
+                            stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                    qnames[i]));
+                        }
+                    } else {
+                        stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                qnames[i]));
+                    }
+                }
+
+                xmlWriter.writeCharacters(stringToWrite.toString());
+            }
+        }
+
+        /**
+         * Register a namespace prefix
+         */
+        private java.lang.String registerPrefix(
+            javax.xml.stream.XMLStreamWriter xmlWriter,
+            java.lang.String namespace)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String prefix = xmlWriter.getPrefix(namespace);
+
+            if (prefix == null) {
+                prefix = generatePrefix(namespace);
+
+                javax.xml.namespace.NamespaceContext nsContext = xmlWriter.getNamespaceContext();
+
+                while (true) {
+                    java.lang.String uri = nsContext.getNamespaceURI(prefix);
+
+                    if ((uri == null) || (uri.length() == 0)) {
+                        break;
+                    }
+
+                    prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+                }
+
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+            }
+
+            return prefix;
+        }
+
+        /**
+         *  Factory class that keeps the parse method
+         */
+        public static class Factory {
+            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
+
+            /**
+             * static method to create the object
+             * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
+             *                If this object is not an element, it is a complex type and the reader is at the event just after the outer start element
+             * Postcondition: If this object is an element, the reader is positioned at its end element
+             *                If this object is a complex type, the reader is positioned at the end element of its outer element
+             */
+            public static GetJsRefferenceResponse parse(
+                javax.xml.stream.XMLStreamReader reader)
+                throws java.lang.Exception {
+                GetJsRefferenceResponse object = new GetJsRefferenceResponse();
+
+                int event;
+                javax.xml.namespace.QName currentQName = null;
+                java.lang.String nillableValue = null;
+                java.lang.String prefix = "";
+                java.lang.String namespaceuri = "";
+
+                try {
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    currentQName = reader.getName();
+
+                    if (reader.getAttributeValue(
+                                "http://www.w3.org/2001/XMLSchema-instance",
+                                "type") != null) {
+                        java.lang.String fullTypeName = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                                "type");
+
+                        if (fullTypeName != null) {
+                            java.lang.String nsPrefix = null;
+
+                            if (fullTypeName.indexOf(":") > -1) {
+                                nsPrefix = fullTypeName.substring(0,
+                                        fullTypeName.indexOf(":"));
+                            }
+
+                            nsPrefix = (nsPrefix == null) ? "" : nsPrefix;
+
+                            java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
+                                        ":") + 1);
+
+                            if (!"getJsRefferenceResponse".equals(type)) {
+                                //find namespace for the prefix
+                                java.lang.String nsUri = reader.getNamespaceContext()
+                                                               .getNamespaceURI(nsPrefix);
+
+                                return (GetJsRefferenceResponse) ExtensionMapper.getTypeObject(nsUri,
+                                    type, reader);
+                            }
+                        }
+                    }
+
+                    // Note all attributes that were handled. Used to differ normal attributes
+                    // from anyAttributes.
+                    java.util.Vector handledAttributes = new java.util.Vector();
+
+                    reader.next();
+
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    if (reader.isStartElement() &&
+                            new javax.xml.namespace.QName(
+                                "http://ws.apache.org/axis2", "return").equals(
+                                reader.getName())) {
+                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                                "nil");
+
+                        if ("true".equals(nillableValue) ||
+                                "1".equals(nillableValue)) {
+                            object.set_return(null);
+                            reader.next();
+
+                            reader.next();
+                        } else {
+                            object.set_return(JsRefference.Factory.parse(reader));
+
+                            reader.next();
+                        }
+                    } // End of if for expected property start element
+
+                    else {
+                    }
 
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
@@ -1491,6 +1912,16 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
             if ("http://ws.apache.org/axis2/xsd".equals(namespaceURI) &&
                     "Section".equals(typeName)) {
                 return Section.Factory.parse(reader);
+            }
+
+            if ("http://ws.apache.org/axis2/xsd".equals(namespaceURI) &&
+                    "Author".equals(typeName)) {
+                return Author.Factory.parse(reader);
+            }
+
+            if ("http://ws.apache.org/axis2/xsd".equals(namespaceURI) &&
+                    "JsRefference".equals(typeName)) {
+                return JsRefference.Factory.parse(reader);
             }
 
             throw new org.apache.axis2.databinding.ADBException(
@@ -1993,426 +2424,6 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
         } //end of factory class
     }
 
-    public static class GetSubsectionResponse implements org.apache.axis2.databinding.ADBBean {
-        public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://ws.apache.org/axis2",
-                "getSubsectionResponse", "ns2");
-
-        /**
-         * field for _return
-         */
-        protected Subsection local_return;
-
-        /*  This tracker boolean wil be used to detect whether the user called the set method
-         *   for this attribute. It will be used to determine whether to include this field
-         *   in the serialized XML
-         */
-        protected boolean local_returnTracker = false;
-
-        public boolean is_returnSpecified() {
-            return local_returnTracker;
-        }
-
-        /**
-         * Auto generated getter method
-         * @return Subsection
-         */
-        public Subsection get_return() {
-            return local_return;
-        }
-
-        /**
-         * Auto generated setter method
-         * @param param _return
-         */
-        public void set_return(Subsection param) {
-            local_returnTracker = true;
-
-            this.local_return = param;
-        }
-
-        /**
-         *
-         * @param parentQName
-         * @param factory
-         * @return org.apache.axiom.om.OMElement
-         */
-        public org.apache.axiom.om.OMElement getOMElement(
-            final javax.xml.namespace.QName parentQName,
-            final org.apache.axiom.om.OMFactory factory)
-            throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
-        }
-
-        public void serialize(final javax.xml.namespace.QName parentQName,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException,
-                org.apache.axis2.databinding.ADBException {
-            serialize(parentQName, xmlWriter, false);
-        }
-
-        public void serialize(final javax.xml.namespace.QName parentQName,
-            javax.xml.stream.XMLStreamWriter xmlWriter, boolean serializeType)
-            throws javax.xml.stream.XMLStreamException,
-                org.apache.axis2.databinding.ADBException {
-            java.lang.String prefix = null;
-            java.lang.String namespace = null;
-
-            prefix = parentQName.getPrefix();
-            namespace = parentQName.getNamespaceURI();
-            writeStartElement(prefix, namespace, parentQName.getLocalPart(),
-                xmlWriter);
-
-            if (serializeType) {
-                java.lang.String namespacePrefix = registerPrefix(xmlWriter,
-                        "http://ws.apache.org/axis2");
-
-                if ((namespacePrefix != null) &&
-                        (namespacePrefix.trim().length() > 0)) {
-                    writeAttribute("xsi",
-                        "http://www.w3.org/2001/XMLSchema-instance", "type",
-                        namespacePrefix + ":getSubsectionResponse", xmlWriter);
-                } else {
-                    writeAttribute("xsi",
-                        "http://www.w3.org/2001/XMLSchema-instance", "type",
-                        "getSubsectionResponse", xmlWriter);
-                }
-            }
-
-            if (local_returnTracker) {
-                if (local_return == null) {
-                    writeStartElement(null, "http://ws.apache.org/axis2",
-                        "return", xmlWriter);
-
-                    // write the nil attribute
-                    writeAttribute("xsi",
-                        "http://www.w3.org/2001/XMLSchema-instance", "nil",
-                        "1", xmlWriter);
-                    xmlWriter.writeEndElement();
-                } else {
-                    local_return.serialize(new javax.xml.namespace.QName(
-                            "http://ws.apache.org/axis2", "return"), xmlWriter);
-                }
-            }
-
-            xmlWriter.writeEndElement();
-        }
-
-        private static java.lang.String generatePrefix(
-            java.lang.String namespace) {
-            if (namespace.equals("http://ws.apache.org/axis2")) {
-                return "ns2";
-            }
-
-            return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
-        }
-
-        /**
-         * Utility method to write an element start tag.
-         */
-        private void writeStartElement(java.lang.String prefix,
-            java.lang.String namespace, java.lang.String localPart,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
-            } else {
-                if (namespace.length() == 0) {
-                    prefix = "";
-                } else if (prefix == null) {
-                    prefix = generatePrefix(namespace);
-                }
-
-                xmlWriter.writeStartElement(prefix, localPart, namespace);
-                xmlWriter.writeNamespace(prefix, namespace);
-                xmlWriter.setPrefix(prefix, namespace);
-            }
-        }
-
-        /**
-         * Util method to write an attribute with the ns prefix
-         */
-        private void writeAttribute(java.lang.String prefix,
-            java.lang.String namespace, java.lang.String attName,
-            java.lang.String attValue,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
-                xmlWriter.writeNamespace(prefix, namespace);
-                xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
-            }
-        }
-
-        /**
-         * Util method to write an attribute without the ns prefix
-         */
-        private void writeAttribute(java.lang.String namespace,
-            java.lang.String attName, java.lang.String attValue,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            if (namespace.equals("")) {
-                xmlWriter.writeAttribute(attName, attValue);
-            } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
-            }
-        }
-
-        /**
-         * Util method to write an attribute without the ns prefix
-         */
-        private void writeQNameAttribute(java.lang.String namespace,
-            java.lang.String attName, javax.xml.namespace.QName qname,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            java.lang.String attributeNamespace = qname.getNamespaceURI();
-            java.lang.String attributePrefix = xmlWriter.getPrefix(attributeNamespace);
-
-            if (attributePrefix == null) {
-                attributePrefix = registerPrefix(xmlWriter, attributeNamespace);
-            }
-
-            java.lang.String attributeValue;
-
-            if (attributePrefix.trim().length() > 0) {
-                attributeValue = attributePrefix + ":" + qname.getLocalPart();
-            } else {
-                attributeValue = qname.getLocalPart();
-            }
-
-            if (namespace.equals("")) {
-                xmlWriter.writeAttribute(attName, attributeValue);
-            } else {
-                registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
-            }
-        }
-
-        /**
-         *  method to handle Qnames
-         */
-        private void writeQName(javax.xml.namespace.QName qname,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            java.lang.String namespaceURI = qname.getNamespaceURI();
-
-            if (namespaceURI != null) {
-                java.lang.String prefix = xmlWriter.getPrefix(namespaceURI);
-
-                if (prefix == null) {
-                    prefix = generatePrefix(namespaceURI);
-                    xmlWriter.writeNamespace(prefix, namespaceURI);
-                    xmlWriter.setPrefix(prefix, namespaceURI);
-                }
-
-                if (prefix.trim().length() > 0) {
-                    xmlWriter.writeCharacters(prefix + ":" +
-                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                            qname));
-                } else {
-                    // i.e this is the default namespace
-                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                            qname));
-                }
-            } else {
-                xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                        qname));
-            }
-        }
-
-        private void writeQNames(javax.xml.namespace.QName[] qnames,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            if (qnames != null) {
-                // we have to store this data until last moment since it is not possible to write any
-                // namespace data after writing the charactor data
-                java.lang.StringBuffer stringToWrite = new java.lang.StringBuffer();
-                java.lang.String namespaceURI = null;
-                java.lang.String prefix = null;
-
-                for (int i = 0; i < qnames.length; i++) {
-                    if (i > 0) {
-                        stringToWrite.append(" ");
-                    }
-
-                    namespaceURI = qnames[i].getNamespaceURI();
-
-                    if (namespaceURI != null) {
-                        prefix = xmlWriter.getPrefix(namespaceURI);
-
-                        if ((prefix == null) || (prefix.length() == 0)) {
-                            prefix = generatePrefix(namespaceURI);
-                            xmlWriter.writeNamespace(prefix, namespaceURI);
-                            xmlWriter.setPrefix(prefix, namespaceURI);
-                        }
-
-                        if (prefix.trim().length() > 0) {
-                            stringToWrite.append(prefix).append(":")
-                                         .append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                                    qnames[i]));
-                        } else {
-                            stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                                    qnames[i]));
-                        }
-                    } else {
-                        stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                                qnames[i]));
-                    }
-                }
-
-                xmlWriter.writeCharacters(stringToWrite.toString());
-            }
-        }
-
-        /**
-         * Register a namespace prefix
-         */
-        private java.lang.String registerPrefix(
-            javax.xml.stream.XMLStreamWriter xmlWriter,
-            java.lang.String namespace)
-            throws javax.xml.stream.XMLStreamException {
-            java.lang.String prefix = xmlWriter.getPrefix(namespace);
-
-            if (prefix == null) {
-                prefix = generatePrefix(namespace);
-
-                javax.xml.namespace.NamespaceContext nsContext = xmlWriter.getNamespaceContext();
-
-                while (true) {
-                    java.lang.String uri = nsContext.getNamespaceURI(prefix);
-
-                    if ((uri == null) || (uri.length() == 0)) {
-                        break;
-                    }
-
-                    prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
-                }
-
-                xmlWriter.writeNamespace(prefix, namespace);
-                xmlWriter.setPrefix(prefix, namespace);
-            }
-
-            return prefix;
-        }
-
-        /**
-         *  Factory class that keeps the parse method
-         */
-        public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
-            /**
-             * static method to create the object
-             * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
-             *                If this object is not an element, it is a complex type and the reader is at the event just after the outer start element
-             * Postcondition: If this object is an element, the reader is positioned at its end element
-             *                If this object is a complex type, the reader is positioned at the end element of its outer element
-             */
-            public static GetSubsectionResponse parse(
-                javax.xml.stream.XMLStreamReader reader)
-                throws java.lang.Exception {
-                GetSubsectionResponse object = new GetSubsectionResponse();
-
-                int event;
-                javax.xml.namespace.QName currentQName = null;
-                java.lang.String nillableValue = null;
-                java.lang.String prefix = "";
-                java.lang.String namespaceuri = "";
-
-                try {
-                    while (!reader.isStartElement() && !reader.isEndElement())
-                        reader.next();
-
-                    currentQName = reader.getName();
-
-                    if (reader.getAttributeValue(
-                                "http://www.w3.org/2001/XMLSchema-instance",
-                                "type") != null) {
-                        java.lang.String fullTypeName = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-                                "type");
-
-                        if (fullTypeName != null) {
-                            java.lang.String nsPrefix = null;
-
-                            if (fullTypeName.indexOf(":") > -1) {
-                                nsPrefix = fullTypeName.substring(0,
-                                        fullTypeName.indexOf(":"));
-                            }
-
-                            nsPrefix = (nsPrefix == null) ? "" : nsPrefix;
-
-                            java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
-                                        ":") + 1);
-
-                            if (!"getSubsectionResponse".equals(type)) {
-                                //find namespace for the prefix
-                                java.lang.String nsUri = reader.getNamespaceContext()
-                                                               .getNamespaceURI(nsPrefix);
-
-                                return (GetSubsectionResponse) ExtensionMapper.getTypeObject(nsUri,
-                                    type, reader);
-                            }
-                        }
-                    }
-
-                    // Note all attributes that were handled. Used to differ normal attributes
-                    // from anyAttributes.
-                    java.util.Vector handledAttributes = new java.util.Vector();
-
-                    reader.next();
-
-                    while (!reader.isStartElement() && !reader.isEndElement())
-                        reader.next();
-
-                    if (reader.isStartElement() &&
-                            new javax.xml.namespace.QName(
-                                "http://ws.apache.org/axis2", "return").equals(
-                                reader.getName())) {
-                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-                                "nil");
-
-                        if ("true".equals(nillableValue) ||
-                                "1".equals(nillableValue)) {
-                            object.set_return(null);
-                            reader.next();
-
-                            reader.next();
-                        } else {
-                            object.set_return(Subsection.Factory.parse(reader));
-
-                            reader.next();
-                        }
-                    } // End of if for expected property start element
-
-                    else {
-                    }
-
-                    while (!reader.isStartElement() && !reader.isEndElement())
-                        reader.next();
-
-                    if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
-                        throw new org.apache.axis2.databinding.ADBException(
-                            "Unexpected subelement " + reader.getName());
-                    }
-                } catch (javax.xml.stream.XMLStreamException e) {
-                    throw new java.lang.Exception(e);
-                }
-
-                return object;
-            }
-        } //end of factory class
-    }
-
     public static class Subsection implements org.apache.axis2.databinding.ADBBean {
         /* This type was generated from the piece of schema that had
            name = Subsection
@@ -2889,6 +2900,2410 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
                         }
 
                         reader.next();
+                    } // End of if for expected property start element
+
+                    else {
+                    }
+
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    if (reader.isStartElement()) {
+                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        throw new org.apache.axis2.databinding.ADBException(
+                            "Unexpected subelement " + reader.getName());
+                    }
+                } catch (javax.xml.stream.XMLStreamException e) {
+                    throw new java.lang.Exception(e);
+                }
+
+                return object;
+            }
+        } //end of factory class
+    }
+
+    public static class AddSection implements org.apache.axis2.databinding.ADBBean {
+        public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://ws.apache.org/axis2",
+                "addSection", "ns2");
+
+        /**
+         * field for Section
+         */
+        protected Section localSection;
+
+        /*  This tracker boolean wil be used to detect whether the user called the set method
+         *   for this attribute. It will be used to determine whether to include this field
+         *   in the serialized XML
+         */
+        protected boolean localSectionTracker = false;
+
+        public boolean isSectionSpecified() {
+            return localSectionTracker;
+        }
+
+        /**
+         * Auto generated getter method
+         * @return Section
+         */
+        public Section getSection() {
+            return localSection;
+        }
+
+        /**
+         * Auto generated setter method
+         * @param param Section
+         */
+        public void setSection(Section param) {
+            localSectionTracker = true;
+
+            this.localSection = param;
+        }
+
+        /**
+         *
+         * @param parentQName
+         * @param factory
+         * @return org.apache.axiom.om.OMElement
+         */
+        public org.apache.axiom.om.OMElement getOMElement(
+            final javax.xml.namespace.QName parentQName,
+            final org.apache.axiom.om.OMFactory factory)
+            throws org.apache.axis2.databinding.ADBException {
+            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
+                    this, MY_QNAME));
+        }
+
+        public void serialize(final javax.xml.namespace.QName parentQName,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException,
+                org.apache.axis2.databinding.ADBException {
+            serialize(parentQName, xmlWriter, false);
+        }
+
+        public void serialize(final javax.xml.namespace.QName parentQName,
+            javax.xml.stream.XMLStreamWriter xmlWriter, boolean serializeType)
+            throws javax.xml.stream.XMLStreamException,
+                org.apache.axis2.databinding.ADBException {
+            java.lang.String prefix = null;
+            java.lang.String namespace = null;
+
+            prefix = parentQName.getPrefix();
+            namespace = parentQName.getNamespaceURI();
+            writeStartElement(prefix, namespace, parentQName.getLocalPart(),
+                xmlWriter);
+
+            if (serializeType) {
+                java.lang.String namespacePrefix = registerPrefix(xmlWriter,
+                        "http://ws.apache.org/axis2");
+
+                if ((namespacePrefix != null) &&
+                        (namespacePrefix.trim().length() > 0)) {
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "type",
+                        namespacePrefix + ":addSection", xmlWriter);
+                } else {
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "type",
+                        "addSection", xmlWriter);
+                }
+            }
+
+            if (localSectionTracker) {
+                if (localSection == null) {
+                    writeStartElement(null, "http://ws.apache.org/axis2",
+                        "section", xmlWriter);
+
+                    // write the nil attribute
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "nil",
+                        "1", xmlWriter);
+                    xmlWriter.writeEndElement();
+                } else {
+                    localSection.serialize(new javax.xml.namespace.QName(
+                            "http://ws.apache.org/axis2", "section"), xmlWriter);
+                }
+            }
+
+            xmlWriter.writeEndElement();
+        }
+
+        private static java.lang.String generatePrefix(
+            java.lang.String namespace) {
+            if (namespace.equals("http://ws.apache.org/axis2")) {
+                return "ns2";
+            }
+
+            return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+        }
+
+        /**
+         * Utility method to write an element start tag.
+         */
+        private void writeStartElement(java.lang.String prefix,
+            java.lang.String namespace, java.lang.String localPart,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
+
+            if (writerPrefix != null) {
+                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+            } else {
+                if (namespace.length() == 0) {
+                    prefix = "";
+                } else if (prefix == null) {
+                    prefix = generatePrefix(namespace);
+                }
+
+                xmlWriter.writeStartElement(prefix, localPart, namespace);
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+            }
+        }
+
+        /**
+         * Util method to write an attribute with the ns prefix
+         */
+        private void writeAttribute(java.lang.String prefix,
+            java.lang.String namespace, java.lang.String attName,
+            java.lang.String attValue,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
+
+            if (writerPrefix != null) {
+                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
+                    attValue);
+            } else {
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
+            }
+        }
+
+        /**
+         * Util method to write an attribute without the ns prefix
+         */
+        private void writeAttribute(java.lang.String namespace,
+            java.lang.String attName, java.lang.String attValue,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            if (namespace.equals("")) {
+                xmlWriter.writeAttribute(attName, attValue);
+            } else {
+                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
+                    namespace, attName, attValue);
+            }
+        }
+
+        /**
+         * Util method to write an attribute without the ns prefix
+         */
+        private void writeQNameAttribute(java.lang.String namespace,
+            java.lang.String attName, javax.xml.namespace.QName qname,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String attributeNamespace = qname.getNamespaceURI();
+            java.lang.String attributePrefix = xmlWriter.getPrefix(attributeNamespace);
+
+            if (attributePrefix == null) {
+                attributePrefix = registerPrefix(xmlWriter, attributeNamespace);
+            }
+
+            java.lang.String attributeValue;
+
+            if (attributePrefix.trim().length() > 0) {
+                attributeValue = attributePrefix + ":" + qname.getLocalPart();
+            } else {
+                attributeValue = qname.getLocalPart();
+            }
+
+            if (namespace.equals("")) {
+                xmlWriter.writeAttribute(attName, attributeValue);
+            } else {
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
+                    attributeValue);
+            }
+        }
+
+        /**
+         *  method to handle Qnames
+         */
+        private void writeQName(javax.xml.namespace.QName qname,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String namespaceURI = qname.getNamespaceURI();
+
+            if (namespaceURI != null) {
+                java.lang.String prefix = xmlWriter.getPrefix(namespaceURI);
+
+                if (prefix == null) {
+                    prefix = generatePrefix(namespaceURI);
+                    xmlWriter.writeNamespace(prefix, namespaceURI);
+                    xmlWriter.setPrefix(prefix, namespaceURI);
+                }
+
+                if (prefix.trim().length() > 0) {
+                    xmlWriter.writeCharacters(prefix + ":" +
+                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            qname));
+                } else {
+                    // i.e this is the default namespace
+                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            qname));
+                }
+            } else {
+                xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        qname));
+            }
+        }
+
+        private void writeQNames(javax.xml.namespace.QName[] qnames,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            if (qnames != null) {
+                // we have to store this data until last moment since it is not possible to write any
+                // namespace data after writing the charactor data
+                java.lang.StringBuffer stringToWrite = new java.lang.StringBuffer();
+                java.lang.String namespaceURI = null;
+                java.lang.String prefix = null;
+
+                for (int i = 0; i < qnames.length; i++) {
+                    if (i > 0) {
+                        stringToWrite.append(" ");
+                    }
+
+                    namespaceURI = qnames[i].getNamespaceURI();
+
+                    if (namespaceURI != null) {
+                        prefix = xmlWriter.getPrefix(namespaceURI);
+
+                        if ((prefix == null) || (prefix.length() == 0)) {
+                            prefix = generatePrefix(namespaceURI);
+                            xmlWriter.writeNamespace(prefix, namespaceURI);
+                            xmlWriter.setPrefix(prefix, namespaceURI);
+                        }
+
+                        if (prefix.trim().length() > 0) {
+                            stringToWrite.append(prefix).append(":")
+                                         .append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                    qnames[i]));
+                        } else {
+                            stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                    qnames[i]));
+                        }
+                    } else {
+                        stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                qnames[i]));
+                    }
+                }
+
+                xmlWriter.writeCharacters(stringToWrite.toString());
+            }
+        }
+
+        /**
+         * Register a namespace prefix
+         */
+        private java.lang.String registerPrefix(
+            javax.xml.stream.XMLStreamWriter xmlWriter,
+            java.lang.String namespace)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String prefix = xmlWriter.getPrefix(namespace);
+
+            if (prefix == null) {
+                prefix = generatePrefix(namespace);
+
+                javax.xml.namespace.NamespaceContext nsContext = xmlWriter.getNamespaceContext();
+
+                while (true) {
+                    java.lang.String uri = nsContext.getNamespaceURI(prefix);
+
+                    if ((uri == null) || (uri.length() == 0)) {
+                        break;
+                    }
+
+                    prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+                }
+
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+            }
+
+            return prefix;
+        }
+
+        /**
+         *  Factory class that keeps the parse method
+         */
+        public static class Factory {
+            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
+
+            /**
+             * static method to create the object
+             * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
+             *                If this object is not an element, it is a complex type and the reader is at the event just after the outer start element
+             * Postcondition: If this object is an element, the reader is positioned at its end element
+             *                If this object is a complex type, the reader is positioned at the end element of its outer element
+             */
+            public static AddSection parse(
+                javax.xml.stream.XMLStreamReader reader)
+                throws java.lang.Exception {
+                AddSection object = new AddSection();
+
+                int event;
+                javax.xml.namespace.QName currentQName = null;
+                java.lang.String nillableValue = null;
+                java.lang.String prefix = "";
+                java.lang.String namespaceuri = "";
+
+                try {
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    currentQName = reader.getName();
+
+                    if (reader.getAttributeValue(
+                                "http://www.w3.org/2001/XMLSchema-instance",
+                                "type") != null) {
+                        java.lang.String fullTypeName = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                                "type");
+
+                        if (fullTypeName != null) {
+                            java.lang.String nsPrefix = null;
+
+                            if (fullTypeName.indexOf(":") > -1) {
+                                nsPrefix = fullTypeName.substring(0,
+                                        fullTypeName.indexOf(":"));
+                            }
+
+                            nsPrefix = (nsPrefix == null) ? "" : nsPrefix;
+
+                            java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
+                                        ":") + 1);
+
+                            if (!"addSection".equals(type)) {
+                                //find namespace for the prefix
+                                java.lang.String nsUri = reader.getNamespaceContext()
+                                                               .getNamespaceURI(nsPrefix);
+
+                                return (AddSection) ExtensionMapper.getTypeObject(nsUri,
+                                    type, reader);
+                            }
+                        }
+                    }
+
+                    // Note all attributes that were handled. Used to differ normal attributes
+                    // from anyAttributes.
+                    java.util.Vector handledAttributes = new java.util.Vector();
+
+                    reader.next();
+
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    if (reader.isStartElement() &&
+                            new javax.xml.namespace.QName(
+                                "http://ws.apache.org/axis2", "section").equals(
+                                reader.getName())) {
+                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                                "nil");
+
+                        if ("true".equals(nillableValue) ||
+                                "1".equals(nillableValue)) {
+                            object.setSection(null);
+                            reader.next();
+
+                            reader.next();
+                        } else {
+                            object.setSection(Section.Factory.parse(reader));
+
+                            reader.next();
+                        }
+                    } // End of if for expected property start element
+
+                    else {
+                    }
+
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    if (reader.isStartElement()) {
+                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        throw new org.apache.axis2.databinding.ADBException(
+                            "Unexpected subelement " + reader.getName());
+                    }
+                } catch (javax.xml.stream.XMLStreamException e) {
+                    throw new java.lang.Exception(e);
+                }
+
+                return object;
+            }
+        } //end of factory class
+    }
+
+    public static class Author implements org.apache.axis2.databinding.ADBBean {
+        /* This type was generated from the piece of schema that had
+           name = Author
+           Namespace URI = http://ws.apache.org/axis2/xsd
+           Namespace Prefix = ns1
+         */
+
+        /**
+         * field for FirstName
+         */
+        protected java.lang.String localFirstName;
+
+        /*  This tracker boolean wil be used to detect whether the user called the set method
+         *   for this attribute. It will be used to determine whether to include this field
+         *   in the serialized XML
+         */
+        protected boolean localFirstNameTracker = false;
+
+        /**
+         * field for LastName
+         */
+        protected java.lang.String localLastName;
+
+        /*  This tracker boolean wil be used to detect whether the user called the set method
+         *   for this attribute. It will be used to determine whether to include this field
+         *   in the serialized XML
+         */
+        protected boolean localLastNameTracker = false;
+
+        /**
+         * field for Speciality
+         */
+        protected java.lang.String localSpeciality;
+
+        /*  This tracker boolean wil be used to detect whether the user called the set method
+         *   for this attribute. It will be used to determine whether to include this field
+         *   in the serialized XML
+         */
+        protected boolean localSpecialityTracker = false;
+
+        public boolean isFirstNameSpecified() {
+            return localFirstNameTracker;
+        }
+
+        /**
+         * Auto generated getter method
+         * @return java.lang.String
+         */
+        public java.lang.String getFirstName() {
+            return localFirstName;
+        }
+
+        /**
+         * Auto generated setter method
+         * @param param FirstName
+         */
+        public void setFirstName(java.lang.String param) {
+            localFirstNameTracker = true;
+
+            this.localFirstName = param;
+        }
+
+        public boolean isLastNameSpecified() {
+            return localLastNameTracker;
+        }
+
+        /**
+         * Auto generated getter method
+         * @return java.lang.String
+         */
+        public java.lang.String getLastName() {
+            return localLastName;
+        }
+
+        /**
+         * Auto generated setter method
+         * @param param LastName
+         */
+        public void setLastName(java.lang.String param) {
+            localLastNameTracker = true;
+
+            this.localLastName = param;
+        }
+
+        public boolean isSpecialitySpecified() {
+            return localSpecialityTracker;
+        }
+
+        /**
+         * Auto generated getter method
+         * @return java.lang.String
+         */
+        public java.lang.String getSpeciality() {
+            return localSpeciality;
+        }
+
+        /**
+         * Auto generated setter method
+         * @param param Speciality
+         */
+        public void setSpeciality(java.lang.String param) {
+            localSpecialityTracker = true;
+
+            this.localSpeciality = param;
+        }
+
+        /**
+         *
+         * @param parentQName
+         * @param factory
+         * @return org.apache.axiom.om.OMElement
+         */
+        public org.apache.axiom.om.OMElement getOMElement(
+            final javax.xml.namespace.QName parentQName,
+            final org.apache.axiom.om.OMFactory factory)
+            throws org.apache.axis2.databinding.ADBException {
+            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
+                    this, parentQName));
+        }
+
+        public void serialize(final javax.xml.namespace.QName parentQName,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException,
+                org.apache.axis2.databinding.ADBException {
+            serialize(parentQName, xmlWriter, false);
+        }
+
+        public void serialize(final javax.xml.namespace.QName parentQName,
+            javax.xml.stream.XMLStreamWriter xmlWriter, boolean serializeType)
+            throws javax.xml.stream.XMLStreamException,
+                org.apache.axis2.databinding.ADBException {
+            java.lang.String prefix = null;
+            java.lang.String namespace = null;
+
+            prefix = parentQName.getPrefix();
+            namespace = parentQName.getNamespaceURI();
+            writeStartElement(prefix, namespace, parentQName.getLocalPart(),
+                xmlWriter);
+
+            if (serializeType) {
+                java.lang.String namespacePrefix = registerPrefix(xmlWriter,
+                        "http://ws.apache.org/axis2/xsd");
+
+                if ((namespacePrefix != null) &&
+                        (namespacePrefix.trim().length() > 0)) {
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "type",
+                        namespacePrefix + ":Author", xmlWriter);
+                } else {
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "type",
+                        "Author", xmlWriter);
+                }
+            }
+
+            if (localFirstNameTracker) {
+                namespace = "http://ws.apache.org/axis2/xsd";
+                writeStartElement(null, namespace, "firstName", xmlWriter);
+
+                if (localFirstName == null) {
+                    // write the nil attribute
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "nil",
+                        "1", xmlWriter);
+                } else {
+                    xmlWriter.writeCharacters(localFirstName);
+                }
+
+                xmlWriter.writeEndElement();
+            }
+
+            if (localLastNameTracker) {
+                namespace = "http://ws.apache.org/axis2/xsd";
+                writeStartElement(null, namespace, "lastName", xmlWriter);
+
+                if (localLastName == null) {
+                    // write the nil attribute
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "nil",
+                        "1", xmlWriter);
+                } else {
+                    xmlWriter.writeCharacters(localLastName);
+                }
+
+                xmlWriter.writeEndElement();
+            }
+
+            if (localSpecialityTracker) {
+                namespace = "http://ws.apache.org/axis2/xsd";
+                writeStartElement(null, namespace, "speciality", xmlWriter);
+
+                if (localSpeciality == null) {
+                    // write the nil attribute
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "nil",
+                        "1", xmlWriter);
+                } else {
+                    xmlWriter.writeCharacters(localSpeciality);
+                }
+
+                xmlWriter.writeEndElement();
+            }
+
+            xmlWriter.writeEndElement();
+        }
+
+        private static java.lang.String generatePrefix(
+            java.lang.String namespace) {
+            if (namespace.equals("http://ws.apache.org/axis2/xsd")) {
+                return "ns1";
+            }
+
+            return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+        }
+
+        /**
+         * Utility method to write an element start tag.
+         */
+        private void writeStartElement(java.lang.String prefix,
+            java.lang.String namespace, java.lang.String localPart,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
+
+            if (writerPrefix != null) {
+                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+            } else {
+                if (namespace.length() == 0) {
+                    prefix = "";
+                } else if (prefix == null) {
+                    prefix = generatePrefix(namespace);
+                }
+
+                xmlWriter.writeStartElement(prefix, localPart, namespace);
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+            }
+        }
+
+        /**
+         * Util method to write an attribute with the ns prefix
+         */
+        private void writeAttribute(java.lang.String prefix,
+            java.lang.String namespace, java.lang.String attName,
+            java.lang.String attValue,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
+
+            if (writerPrefix != null) {
+                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
+                    attValue);
+            } else {
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
+            }
+        }
+
+        /**
+         * Util method to write an attribute without the ns prefix
+         */
+        private void writeAttribute(java.lang.String namespace,
+            java.lang.String attName, java.lang.String attValue,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            if (namespace.equals("")) {
+                xmlWriter.writeAttribute(attName, attValue);
+            } else {
+                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
+                    namespace, attName, attValue);
+            }
+        }
+
+        /**
+         * Util method to write an attribute without the ns prefix
+         */
+        private void writeQNameAttribute(java.lang.String namespace,
+            java.lang.String attName, javax.xml.namespace.QName qname,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String attributeNamespace = qname.getNamespaceURI();
+            java.lang.String attributePrefix = xmlWriter.getPrefix(attributeNamespace);
+
+            if (attributePrefix == null) {
+                attributePrefix = registerPrefix(xmlWriter, attributeNamespace);
+            }
+
+            java.lang.String attributeValue;
+
+            if (attributePrefix.trim().length() > 0) {
+                attributeValue = attributePrefix + ":" + qname.getLocalPart();
+            } else {
+                attributeValue = qname.getLocalPart();
+            }
+
+            if (namespace.equals("")) {
+                xmlWriter.writeAttribute(attName, attributeValue);
+            } else {
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
+                    attributeValue);
+            }
+        }
+
+        /**
+         *  method to handle Qnames
+         */
+        private void writeQName(javax.xml.namespace.QName qname,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String namespaceURI = qname.getNamespaceURI();
+
+            if (namespaceURI != null) {
+                java.lang.String prefix = xmlWriter.getPrefix(namespaceURI);
+
+                if (prefix == null) {
+                    prefix = generatePrefix(namespaceURI);
+                    xmlWriter.writeNamespace(prefix, namespaceURI);
+                    xmlWriter.setPrefix(prefix, namespaceURI);
+                }
+
+                if (prefix.trim().length() > 0) {
+                    xmlWriter.writeCharacters(prefix + ":" +
+                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            qname));
+                } else {
+                    // i.e this is the default namespace
+                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            qname));
+                }
+            } else {
+                xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        qname));
+            }
+        }
+
+        private void writeQNames(javax.xml.namespace.QName[] qnames,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            if (qnames != null) {
+                // we have to store this data until last moment since it is not possible to write any
+                // namespace data after writing the charactor data
+                java.lang.StringBuffer stringToWrite = new java.lang.StringBuffer();
+                java.lang.String namespaceURI = null;
+                java.lang.String prefix = null;
+
+                for (int i = 0; i < qnames.length; i++) {
+                    if (i > 0) {
+                        stringToWrite.append(" ");
+                    }
+
+                    namespaceURI = qnames[i].getNamespaceURI();
+
+                    if (namespaceURI != null) {
+                        prefix = xmlWriter.getPrefix(namespaceURI);
+
+                        if ((prefix == null) || (prefix.length() == 0)) {
+                            prefix = generatePrefix(namespaceURI);
+                            xmlWriter.writeNamespace(prefix, namespaceURI);
+                            xmlWriter.setPrefix(prefix, namespaceURI);
+                        }
+
+                        if (prefix.trim().length() > 0) {
+                            stringToWrite.append(prefix).append(":")
+                                         .append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                    qnames[i]));
+                        } else {
+                            stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                    qnames[i]));
+                        }
+                    } else {
+                        stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                qnames[i]));
+                    }
+                }
+
+                xmlWriter.writeCharacters(stringToWrite.toString());
+            }
+        }
+
+        /**
+         * Register a namespace prefix
+         */
+        private java.lang.String registerPrefix(
+            javax.xml.stream.XMLStreamWriter xmlWriter,
+            java.lang.String namespace)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String prefix = xmlWriter.getPrefix(namespace);
+
+            if (prefix == null) {
+                prefix = generatePrefix(namespace);
+
+                javax.xml.namespace.NamespaceContext nsContext = xmlWriter.getNamespaceContext();
+
+                while (true) {
+                    java.lang.String uri = nsContext.getNamespaceURI(prefix);
+
+                    if ((uri == null) || (uri.length() == 0)) {
+                        break;
+                    }
+
+                    prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+                }
+
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+            }
+
+            return prefix;
+        }
+
+        /**
+         *  Factory class that keeps the parse method
+         */
+        public static class Factory {
+            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
+
+            /**
+             * static method to create the object
+             * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
+             *                If this object is not an element, it is a complex type and the reader is at the event just after the outer start element
+             * Postcondition: If this object is an element, the reader is positioned at its end element
+             *                If this object is a complex type, the reader is positioned at the end element of its outer element
+             */
+            public static Author parse(javax.xml.stream.XMLStreamReader reader)
+                throws java.lang.Exception {
+                Author object = new Author();
+
+                int event;
+                javax.xml.namespace.QName currentQName = null;
+                java.lang.String nillableValue = null;
+                java.lang.String prefix = "";
+                java.lang.String namespaceuri = "";
+
+                try {
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    currentQName = reader.getName();
+
+                    if (reader.getAttributeValue(
+                                "http://www.w3.org/2001/XMLSchema-instance",
+                                "type") != null) {
+                        java.lang.String fullTypeName = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                                "type");
+
+                        if (fullTypeName != null) {
+                            java.lang.String nsPrefix = null;
+
+                            if (fullTypeName.indexOf(":") > -1) {
+                                nsPrefix = fullTypeName.substring(0,
+                                        fullTypeName.indexOf(":"));
+                            }
+
+                            nsPrefix = (nsPrefix == null) ? "" : nsPrefix;
+
+                            java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
+                                        ":") + 1);
+
+                            if (!"Author".equals(type)) {
+                                //find namespace for the prefix
+                                java.lang.String nsUri = reader.getNamespaceContext()
+                                                               .getNamespaceURI(nsPrefix);
+
+                                return (Author) ExtensionMapper.getTypeObject(nsUri,
+                                    type, reader);
+                            }
+                        }
+                    }
+
+                    // Note all attributes that were handled. Used to differ normal attributes
+                    // from anyAttributes.
+                    java.util.Vector handledAttributes = new java.util.Vector();
+
+                    reader.next();
+
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    if (reader.isStartElement() &&
+                            new javax.xml.namespace.QName(
+                                "http://ws.apache.org/axis2/xsd", "firstName").equals(
+                                reader.getName())) {
+                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                                "nil");
+
+                        if (!"true".equals(nillableValue) &&
+                                !"1".equals(nillableValue)) {
+                            java.lang.String content = reader.getElementText();
+
+                            object.setFirstName(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                    content));
+                        } else {
+                            reader.getElementText(); // throw away text nodes if any.
+                        }
+
+                        reader.next();
+                    } // End of if for expected property start element
+
+                    else {
+                    }
+
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    if (reader.isStartElement() &&
+                            new javax.xml.namespace.QName(
+                                "http://ws.apache.org/axis2/xsd", "lastName").equals(
+                                reader.getName())) {
+                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                                "nil");
+
+                        if (!"true".equals(nillableValue) &&
+                                !"1".equals(nillableValue)) {
+                            java.lang.String content = reader.getElementText();
+
+                            object.setLastName(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                    content));
+                        } else {
+                            reader.getElementText(); // throw away text nodes if any.
+                        }
+
+                        reader.next();
+                    } // End of if for expected property start element
+
+                    else {
+                    }
+
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    if (reader.isStartElement() &&
+                            new javax.xml.namespace.QName(
+                                "http://ws.apache.org/axis2/xsd", "speciality").equals(
+                                reader.getName())) {
+                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                                "nil");
+
+                        if (!"true".equals(nillableValue) &&
+                                !"1".equals(nillableValue)) {
+                            java.lang.String content = reader.getElementText();
+
+                            object.setSpeciality(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                    content));
+                        } else {
+                            reader.getElementText(); // throw away text nodes if any.
+                        }
+
+                        reader.next();
+                    } // End of if for expected property start element
+
+                    else {
+                    }
+
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    if (reader.isStartElement()) {
+                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        throw new org.apache.axis2.databinding.ADBException(
+                            "Unexpected subelement " + reader.getName());
+                    }
+                } catch (javax.xml.stream.XMLStreamException e) {
+                    throw new java.lang.Exception(e);
+                }
+
+                return object;
+            }
+        } //end of factory class
+    }
+
+    public static class AddSubsection implements org.apache.axis2.databinding.ADBBean {
+        public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://ws.apache.org/axis2",
+                "addSubsection", "ns2");
+
+        /**
+         * field for SectionName
+         */
+        protected java.lang.String localSectionName;
+
+        /*  This tracker boolean wil be used to detect whether the user called the set method
+         *   for this attribute. It will be used to determine whether to include this field
+         *   in the serialized XML
+         */
+        protected boolean localSectionNameTracker = false;
+
+        /**
+         * field for Subsection
+         */
+        protected Subsection localSubsection;
+
+        /*  This tracker boolean wil be used to detect whether the user called the set method
+         *   for this attribute. It will be used to determine whether to include this field
+         *   in the serialized XML
+         */
+        protected boolean localSubsectionTracker = false;
+
+        public boolean isSectionNameSpecified() {
+            return localSectionNameTracker;
+        }
+
+        /**
+         * Auto generated getter method
+         * @return java.lang.String
+         */
+        public java.lang.String getSectionName() {
+            return localSectionName;
+        }
+
+        /**
+         * Auto generated setter method
+         * @param param SectionName
+         */
+        public void setSectionName(java.lang.String param) {
+            localSectionNameTracker = true;
+
+            this.localSectionName = param;
+        }
+
+        public boolean isSubsectionSpecified() {
+            return localSubsectionTracker;
+        }
+
+        /**
+         * Auto generated getter method
+         * @return Subsection
+         */
+        public Subsection getSubsection() {
+            return localSubsection;
+        }
+
+        /**
+         * Auto generated setter method
+         * @param param Subsection
+         */
+        public void setSubsection(Subsection param) {
+            localSubsectionTracker = true;
+
+            this.localSubsection = param;
+        }
+
+        /**
+         *
+         * @param parentQName
+         * @param factory
+         * @return org.apache.axiom.om.OMElement
+         */
+        public org.apache.axiom.om.OMElement getOMElement(
+            final javax.xml.namespace.QName parentQName,
+            final org.apache.axiom.om.OMFactory factory)
+            throws org.apache.axis2.databinding.ADBException {
+            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
+                    this, MY_QNAME));
+        }
+
+        public void serialize(final javax.xml.namespace.QName parentQName,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException,
+                org.apache.axis2.databinding.ADBException {
+            serialize(parentQName, xmlWriter, false);
+        }
+
+        public void serialize(final javax.xml.namespace.QName parentQName,
+            javax.xml.stream.XMLStreamWriter xmlWriter, boolean serializeType)
+            throws javax.xml.stream.XMLStreamException,
+                org.apache.axis2.databinding.ADBException {
+            java.lang.String prefix = null;
+            java.lang.String namespace = null;
+
+            prefix = parentQName.getPrefix();
+            namespace = parentQName.getNamespaceURI();
+            writeStartElement(prefix, namespace, parentQName.getLocalPart(),
+                xmlWriter);
+
+            if (serializeType) {
+                java.lang.String namespacePrefix = registerPrefix(xmlWriter,
+                        "http://ws.apache.org/axis2");
+
+                if ((namespacePrefix != null) &&
+                        (namespacePrefix.trim().length() > 0)) {
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "type",
+                        namespacePrefix + ":addSubsection", xmlWriter);
+                } else {
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "type",
+                        "addSubsection", xmlWriter);
+                }
+            }
+
+            if (localSectionNameTracker) {
+                namespace = "http://ws.apache.org/axis2";
+                writeStartElement(null, namespace, "sectionName", xmlWriter);
+
+                if (localSectionName == null) {
+                    // write the nil attribute
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "nil",
+                        "1", xmlWriter);
+                } else {
+                    xmlWriter.writeCharacters(localSectionName);
+                }
+
+                xmlWriter.writeEndElement();
+            }
+
+            if (localSubsectionTracker) {
+                if (localSubsection == null) {
+                    writeStartElement(null, "http://ws.apache.org/axis2",
+                        "subsection", xmlWriter);
+
+                    // write the nil attribute
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "nil",
+                        "1", xmlWriter);
+                    xmlWriter.writeEndElement();
+                } else {
+                    localSubsection.serialize(new javax.xml.namespace.QName(
+                            "http://ws.apache.org/axis2", "subsection"),
+                        xmlWriter);
+                }
+            }
+
+            xmlWriter.writeEndElement();
+        }
+
+        private static java.lang.String generatePrefix(
+            java.lang.String namespace) {
+            if (namespace.equals("http://ws.apache.org/axis2")) {
+                return "ns2";
+            }
+
+            return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+        }
+
+        /**
+         * Utility method to write an element start tag.
+         */
+        private void writeStartElement(java.lang.String prefix,
+            java.lang.String namespace, java.lang.String localPart,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
+
+            if (writerPrefix != null) {
+                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+            } else {
+                if (namespace.length() == 0) {
+                    prefix = "";
+                } else if (prefix == null) {
+                    prefix = generatePrefix(namespace);
+                }
+
+                xmlWriter.writeStartElement(prefix, localPart, namespace);
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+            }
+        }
+
+        /**
+         * Util method to write an attribute with the ns prefix
+         */
+        private void writeAttribute(java.lang.String prefix,
+            java.lang.String namespace, java.lang.String attName,
+            java.lang.String attValue,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
+
+            if (writerPrefix != null) {
+                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
+                    attValue);
+            } else {
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
+            }
+        }
+
+        /**
+         * Util method to write an attribute without the ns prefix
+         */
+        private void writeAttribute(java.lang.String namespace,
+            java.lang.String attName, java.lang.String attValue,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            if (namespace.equals("")) {
+                xmlWriter.writeAttribute(attName, attValue);
+            } else {
+                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
+                    namespace, attName, attValue);
+            }
+        }
+
+        /**
+         * Util method to write an attribute without the ns prefix
+         */
+        private void writeQNameAttribute(java.lang.String namespace,
+            java.lang.String attName, javax.xml.namespace.QName qname,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String attributeNamespace = qname.getNamespaceURI();
+            java.lang.String attributePrefix = xmlWriter.getPrefix(attributeNamespace);
+
+            if (attributePrefix == null) {
+                attributePrefix = registerPrefix(xmlWriter, attributeNamespace);
+            }
+
+            java.lang.String attributeValue;
+
+            if (attributePrefix.trim().length() > 0) {
+                attributeValue = attributePrefix + ":" + qname.getLocalPart();
+            } else {
+                attributeValue = qname.getLocalPart();
+            }
+
+            if (namespace.equals("")) {
+                xmlWriter.writeAttribute(attName, attributeValue);
+            } else {
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
+                    attributeValue);
+            }
+        }
+
+        /**
+         *  method to handle Qnames
+         */
+        private void writeQName(javax.xml.namespace.QName qname,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String namespaceURI = qname.getNamespaceURI();
+
+            if (namespaceURI != null) {
+                java.lang.String prefix = xmlWriter.getPrefix(namespaceURI);
+
+                if (prefix == null) {
+                    prefix = generatePrefix(namespaceURI);
+                    xmlWriter.writeNamespace(prefix, namespaceURI);
+                    xmlWriter.setPrefix(prefix, namespaceURI);
+                }
+
+                if (prefix.trim().length() > 0) {
+                    xmlWriter.writeCharacters(prefix + ":" +
+                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            qname));
+                } else {
+                    // i.e this is the default namespace
+                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            qname));
+                }
+            } else {
+                xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        qname));
+            }
+        }
+
+        private void writeQNames(javax.xml.namespace.QName[] qnames,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            if (qnames != null) {
+                // we have to store this data until last moment since it is not possible to write any
+                // namespace data after writing the charactor data
+                java.lang.StringBuffer stringToWrite = new java.lang.StringBuffer();
+                java.lang.String namespaceURI = null;
+                java.lang.String prefix = null;
+
+                for (int i = 0; i < qnames.length; i++) {
+                    if (i > 0) {
+                        stringToWrite.append(" ");
+                    }
+
+                    namespaceURI = qnames[i].getNamespaceURI();
+
+                    if (namespaceURI != null) {
+                        prefix = xmlWriter.getPrefix(namespaceURI);
+
+                        if ((prefix == null) || (prefix.length() == 0)) {
+                            prefix = generatePrefix(namespaceURI);
+                            xmlWriter.writeNamespace(prefix, namespaceURI);
+                            xmlWriter.setPrefix(prefix, namespaceURI);
+                        }
+
+                        if (prefix.trim().length() > 0) {
+                            stringToWrite.append(prefix).append(":")
+                                         .append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                    qnames[i]));
+                        } else {
+                            stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                    qnames[i]));
+                        }
+                    } else {
+                        stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                qnames[i]));
+                    }
+                }
+
+                xmlWriter.writeCharacters(stringToWrite.toString());
+            }
+        }
+
+        /**
+         * Register a namespace prefix
+         */
+        private java.lang.String registerPrefix(
+            javax.xml.stream.XMLStreamWriter xmlWriter,
+            java.lang.String namespace)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String prefix = xmlWriter.getPrefix(namespace);
+
+            if (prefix == null) {
+                prefix = generatePrefix(namespace);
+
+                javax.xml.namespace.NamespaceContext nsContext = xmlWriter.getNamespaceContext();
+
+                while (true) {
+                    java.lang.String uri = nsContext.getNamespaceURI(prefix);
+
+                    if ((uri == null) || (uri.length() == 0)) {
+                        break;
+                    }
+
+                    prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+                }
+
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+            }
+
+            return prefix;
+        }
+
+        /**
+         *  Factory class that keeps the parse method
+         */
+        public static class Factory {
+            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
+
+            /**
+             * static method to create the object
+             * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
+             *                If this object is not an element, it is a complex type and the reader is at the event just after the outer start element
+             * Postcondition: If this object is an element, the reader is positioned at its end element
+             *                If this object is a complex type, the reader is positioned at the end element of its outer element
+             */
+            public static AddSubsection parse(
+                javax.xml.stream.XMLStreamReader reader)
+                throws java.lang.Exception {
+                AddSubsection object = new AddSubsection();
+
+                int event;
+                javax.xml.namespace.QName currentQName = null;
+                java.lang.String nillableValue = null;
+                java.lang.String prefix = "";
+                java.lang.String namespaceuri = "";
+
+                try {
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    currentQName = reader.getName();
+
+                    if (reader.getAttributeValue(
+                                "http://www.w3.org/2001/XMLSchema-instance",
+                                "type") != null) {
+                        java.lang.String fullTypeName = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                                "type");
+
+                        if (fullTypeName != null) {
+                            java.lang.String nsPrefix = null;
+
+                            if (fullTypeName.indexOf(":") > -1) {
+                                nsPrefix = fullTypeName.substring(0,
+                                        fullTypeName.indexOf(":"));
+                            }
+
+                            nsPrefix = (nsPrefix == null) ? "" : nsPrefix;
+
+                            java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
+                                        ":") + 1);
+
+                            if (!"addSubsection".equals(type)) {
+                                //find namespace for the prefix
+                                java.lang.String nsUri = reader.getNamespaceContext()
+                                                               .getNamespaceURI(nsPrefix);
+
+                                return (AddSubsection) ExtensionMapper.getTypeObject(nsUri,
+                                    type, reader);
+                            }
+                        }
+                    }
+
+                    // Note all attributes that were handled. Used to differ normal attributes
+                    // from anyAttributes.
+                    java.util.Vector handledAttributes = new java.util.Vector();
+
+                    reader.next();
+
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    if (reader.isStartElement() &&
+                            new javax.xml.namespace.QName(
+                                "http://ws.apache.org/axis2", "sectionName").equals(
+                                reader.getName())) {
+                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                                "nil");
+
+                        if (!"true".equals(nillableValue) &&
+                                !"1".equals(nillableValue)) {
+                            java.lang.String content = reader.getElementText();
+
+                            object.setSectionName(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                    content));
+                        } else {
+                            reader.getElementText(); // throw away text nodes if any.
+                        }
+
+                        reader.next();
+                    } // End of if for expected property start element
+
+                    else {
+                    }
+
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    if (reader.isStartElement() &&
+                            new javax.xml.namespace.QName(
+                                "http://ws.apache.org/axis2", "subsection").equals(
+                                reader.getName())) {
+                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                                "nil");
+
+                        if ("true".equals(nillableValue) ||
+                                "1".equals(nillableValue)) {
+                            object.setSubsection(null);
+                            reader.next();
+
+                            reader.next();
+                        } else {
+                            object.setSubsection(Subsection.Factory.parse(
+                                    reader));
+
+                            reader.next();
+                        }
+                    } // End of if for expected property start element
+
+                    else {
+                    }
+
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    if (reader.isStartElement()) {
+                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        throw new org.apache.axis2.databinding.ADBException(
+                            "Unexpected subelement " + reader.getName());
+                    }
+                } catch (javax.xml.stream.XMLStreamException e) {
+                    throw new java.lang.Exception(e);
+                }
+
+                return object;
+            }
+        } //end of factory class
+    }
+
+    public static class GetSubsection implements org.apache.axis2.databinding.ADBBean {
+        public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://ws.apache.org/axis2",
+                "getSubsection", "ns2");
+
+        /**
+         * field for SectionName
+         */
+        protected java.lang.String localSectionName;
+
+        /*  This tracker boolean wil be used to detect whether the user called the set method
+         *   for this attribute. It will be used to determine whether to include this field
+         *   in the serialized XML
+         */
+        protected boolean localSectionNameTracker = false;
+
+        /**
+         * field for SubsectionName
+         */
+        protected java.lang.String localSubsectionName;
+
+        /*  This tracker boolean wil be used to detect whether the user called the set method
+         *   for this attribute. It will be used to determine whether to include this field
+         *   in the serialized XML
+         */
+        protected boolean localSubsectionNameTracker = false;
+
+        public boolean isSectionNameSpecified() {
+            return localSectionNameTracker;
+        }
+
+        /**
+         * Auto generated getter method
+         * @return java.lang.String
+         */
+        public java.lang.String getSectionName() {
+            return localSectionName;
+        }
+
+        /**
+         * Auto generated setter method
+         * @param param SectionName
+         */
+        public void setSectionName(java.lang.String param) {
+            localSectionNameTracker = true;
+
+            this.localSectionName = param;
+        }
+
+        public boolean isSubsectionNameSpecified() {
+            return localSubsectionNameTracker;
+        }
+
+        /**
+         * Auto generated getter method
+         * @return java.lang.String
+         */
+        public java.lang.String getSubsectionName() {
+            return localSubsectionName;
+        }
+
+        /**
+         * Auto generated setter method
+         * @param param SubsectionName
+         */
+        public void setSubsectionName(java.lang.String param) {
+            localSubsectionNameTracker = true;
+
+            this.localSubsectionName = param;
+        }
+
+        /**
+         *
+         * @param parentQName
+         * @param factory
+         * @return org.apache.axiom.om.OMElement
+         */
+        public org.apache.axiom.om.OMElement getOMElement(
+            final javax.xml.namespace.QName parentQName,
+            final org.apache.axiom.om.OMFactory factory)
+            throws org.apache.axis2.databinding.ADBException {
+            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
+                    this, MY_QNAME));
+        }
+
+        public void serialize(final javax.xml.namespace.QName parentQName,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException,
+                org.apache.axis2.databinding.ADBException {
+            serialize(parentQName, xmlWriter, false);
+        }
+
+        public void serialize(final javax.xml.namespace.QName parentQName,
+            javax.xml.stream.XMLStreamWriter xmlWriter, boolean serializeType)
+            throws javax.xml.stream.XMLStreamException,
+                org.apache.axis2.databinding.ADBException {
+            java.lang.String prefix = null;
+            java.lang.String namespace = null;
+
+            prefix = parentQName.getPrefix();
+            namespace = parentQName.getNamespaceURI();
+            writeStartElement(prefix, namespace, parentQName.getLocalPart(),
+                xmlWriter);
+
+            if (serializeType) {
+                java.lang.String namespacePrefix = registerPrefix(xmlWriter,
+                        "http://ws.apache.org/axis2");
+
+                if ((namespacePrefix != null) &&
+                        (namespacePrefix.trim().length() > 0)) {
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "type",
+                        namespacePrefix + ":getSubsection", xmlWriter);
+                } else {
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "type",
+                        "getSubsection", xmlWriter);
+                }
+            }
+
+            if (localSectionNameTracker) {
+                namespace = "http://ws.apache.org/axis2";
+                writeStartElement(null, namespace, "sectionName", xmlWriter);
+
+                if (localSectionName == null) {
+                    // write the nil attribute
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "nil",
+                        "1", xmlWriter);
+                } else {
+                    xmlWriter.writeCharacters(localSectionName);
+                }
+
+                xmlWriter.writeEndElement();
+            }
+
+            if (localSubsectionNameTracker) {
+                namespace = "http://ws.apache.org/axis2";
+                writeStartElement(null, namespace, "subsectionName", xmlWriter);
+
+                if (localSubsectionName == null) {
+                    // write the nil attribute
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "nil",
+                        "1", xmlWriter);
+                } else {
+                    xmlWriter.writeCharacters(localSubsectionName);
+                }
+
+                xmlWriter.writeEndElement();
+            }
+
+            xmlWriter.writeEndElement();
+        }
+
+        private static java.lang.String generatePrefix(
+            java.lang.String namespace) {
+            if (namespace.equals("http://ws.apache.org/axis2")) {
+                return "ns2";
+            }
+
+            return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+        }
+
+        /**
+         * Utility method to write an element start tag.
+         */
+        private void writeStartElement(java.lang.String prefix,
+            java.lang.String namespace, java.lang.String localPart,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
+
+            if (writerPrefix != null) {
+                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+            } else {
+                if (namespace.length() == 0) {
+                    prefix = "";
+                } else if (prefix == null) {
+                    prefix = generatePrefix(namespace);
+                }
+
+                xmlWriter.writeStartElement(prefix, localPart, namespace);
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+            }
+        }
+
+        /**
+         * Util method to write an attribute with the ns prefix
+         */
+        private void writeAttribute(java.lang.String prefix,
+            java.lang.String namespace, java.lang.String attName,
+            java.lang.String attValue,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
+
+            if (writerPrefix != null) {
+                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
+                    attValue);
+            } else {
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
+            }
+        }
+
+        /**
+         * Util method to write an attribute without the ns prefix
+         */
+        private void writeAttribute(java.lang.String namespace,
+            java.lang.String attName, java.lang.String attValue,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            if (namespace.equals("")) {
+                xmlWriter.writeAttribute(attName, attValue);
+            } else {
+                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
+                    namespace, attName, attValue);
+            }
+        }
+
+        /**
+         * Util method to write an attribute without the ns prefix
+         */
+        private void writeQNameAttribute(java.lang.String namespace,
+            java.lang.String attName, javax.xml.namespace.QName qname,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String attributeNamespace = qname.getNamespaceURI();
+            java.lang.String attributePrefix = xmlWriter.getPrefix(attributeNamespace);
+
+            if (attributePrefix == null) {
+                attributePrefix = registerPrefix(xmlWriter, attributeNamespace);
+            }
+
+            java.lang.String attributeValue;
+
+            if (attributePrefix.trim().length() > 0) {
+                attributeValue = attributePrefix + ":" + qname.getLocalPart();
+            } else {
+                attributeValue = qname.getLocalPart();
+            }
+
+            if (namespace.equals("")) {
+                xmlWriter.writeAttribute(attName, attributeValue);
+            } else {
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
+                    attributeValue);
+            }
+        }
+
+        /**
+         *  method to handle Qnames
+         */
+        private void writeQName(javax.xml.namespace.QName qname,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String namespaceURI = qname.getNamespaceURI();
+
+            if (namespaceURI != null) {
+                java.lang.String prefix = xmlWriter.getPrefix(namespaceURI);
+
+                if (prefix == null) {
+                    prefix = generatePrefix(namespaceURI);
+                    xmlWriter.writeNamespace(prefix, namespaceURI);
+                    xmlWriter.setPrefix(prefix, namespaceURI);
+                }
+
+                if (prefix.trim().length() > 0) {
+                    xmlWriter.writeCharacters(prefix + ":" +
+                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            qname));
+                } else {
+                    // i.e this is the default namespace
+                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            qname));
+                }
+            } else {
+                xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        qname));
+            }
+        }
+
+        private void writeQNames(javax.xml.namespace.QName[] qnames,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            if (qnames != null) {
+                // we have to store this data until last moment since it is not possible to write any
+                // namespace data after writing the charactor data
+                java.lang.StringBuffer stringToWrite = new java.lang.StringBuffer();
+                java.lang.String namespaceURI = null;
+                java.lang.String prefix = null;
+
+                for (int i = 0; i < qnames.length; i++) {
+                    if (i > 0) {
+                        stringToWrite.append(" ");
+                    }
+
+                    namespaceURI = qnames[i].getNamespaceURI();
+
+                    if (namespaceURI != null) {
+                        prefix = xmlWriter.getPrefix(namespaceURI);
+
+                        if ((prefix == null) || (prefix.length() == 0)) {
+                            prefix = generatePrefix(namespaceURI);
+                            xmlWriter.writeNamespace(prefix, namespaceURI);
+                            xmlWriter.setPrefix(prefix, namespaceURI);
+                        }
+
+                        if (prefix.trim().length() > 0) {
+                            stringToWrite.append(prefix).append(":")
+                                         .append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                    qnames[i]));
+                        } else {
+                            stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                    qnames[i]));
+                        }
+                    } else {
+                        stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                qnames[i]));
+                    }
+                }
+
+                xmlWriter.writeCharacters(stringToWrite.toString());
+            }
+        }
+
+        /**
+         * Register a namespace prefix
+         */
+        private java.lang.String registerPrefix(
+            javax.xml.stream.XMLStreamWriter xmlWriter,
+            java.lang.String namespace)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String prefix = xmlWriter.getPrefix(namespace);
+
+            if (prefix == null) {
+                prefix = generatePrefix(namespace);
+
+                javax.xml.namespace.NamespaceContext nsContext = xmlWriter.getNamespaceContext();
+
+                while (true) {
+                    java.lang.String uri = nsContext.getNamespaceURI(prefix);
+
+                    if ((uri == null) || (uri.length() == 0)) {
+                        break;
+                    }
+
+                    prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+                }
+
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+            }
+
+            return prefix;
+        }
+
+        /**
+         *  Factory class that keeps the parse method
+         */
+        public static class Factory {
+            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
+
+            /**
+             * static method to create the object
+             * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
+             *                If this object is not an element, it is a complex type and the reader is at the event just after the outer start element
+             * Postcondition: If this object is an element, the reader is positioned at its end element
+             *                If this object is a complex type, the reader is positioned at the end element of its outer element
+             */
+            public static GetSubsection parse(
+                javax.xml.stream.XMLStreamReader reader)
+                throws java.lang.Exception {
+                GetSubsection object = new GetSubsection();
+
+                int event;
+                javax.xml.namespace.QName currentQName = null;
+                java.lang.String nillableValue = null;
+                java.lang.String prefix = "";
+                java.lang.String namespaceuri = "";
+
+                try {
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    currentQName = reader.getName();
+
+                    if (reader.getAttributeValue(
+                                "http://www.w3.org/2001/XMLSchema-instance",
+                                "type") != null) {
+                        java.lang.String fullTypeName = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                                "type");
+
+                        if (fullTypeName != null) {
+                            java.lang.String nsPrefix = null;
+
+                            if (fullTypeName.indexOf(":") > -1) {
+                                nsPrefix = fullTypeName.substring(0,
+                                        fullTypeName.indexOf(":"));
+                            }
+
+                            nsPrefix = (nsPrefix == null) ? "" : nsPrefix;
+
+                            java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
+                                        ":") + 1);
+
+                            if (!"getSubsection".equals(type)) {
+                                //find namespace for the prefix
+                                java.lang.String nsUri = reader.getNamespaceContext()
+                                                               .getNamespaceURI(nsPrefix);
+
+                                return (GetSubsection) ExtensionMapper.getTypeObject(nsUri,
+                                    type, reader);
+                            }
+                        }
+                    }
+
+                    // Note all attributes that were handled. Used to differ normal attributes
+                    // from anyAttributes.
+                    java.util.Vector handledAttributes = new java.util.Vector();
+
+                    reader.next();
+
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    if (reader.isStartElement() &&
+                            new javax.xml.namespace.QName(
+                                "http://ws.apache.org/axis2", "sectionName").equals(
+                                reader.getName())) {
+                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                                "nil");
+
+                        if (!"true".equals(nillableValue) &&
+                                !"1".equals(nillableValue)) {
+                            java.lang.String content = reader.getElementText();
+
+                            object.setSectionName(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                    content));
+                        } else {
+                            reader.getElementText(); // throw away text nodes if any.
+                        }
+
+                        reader.next();
+                    } // End of if for expected property start element
+
+                    else {
+                    }
+
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    if (reader.isStartElement() &&
+                            new javax.xml.namespace.QName(
+                                "http://ws.apache.org/axis2", "subsectionName").equals(
+                                reader.getName())) {
+                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                                "nil");
+
+                        if (!"true".equals(nillableValue) &&
+                                !"1".equals(nillableValue)) {
+                            java.lang.String content = reader.getElementText();
+
+                            object.setSubsectionName(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                    content));
+                        } else {
+                            reader.getElementText(); // throw away text nodes if any.
+                        }
+
+                        reader.next();
+                    } // End of if for expected property start element
+
+                    else {
+                    }
+
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    if (reader.isStartElement()) {
+                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        throw new org.apache.axis2.databinding.ADBException(
+                            "Unexpected subelement " + reader.getName());
+                    }
+                } catch (javax.xml.stream.XMLStreamException e) {
+                    throw new java.lang.Exception(e);
+                }
+
+                return object;
+            }
+        } //end of factory class
+    }
+
+    public static class GetSubsectionResponse implements org.apache.axis2.databinding.ADBBean {
+        public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://ws.apache.org/axis2",
+                "getSubsectionResponse", "ns2");
+
+        /**
+         * field for _return
+         */
+        protected Subsection local_return;
+
+        /*  This tracker boolean wil be used to detect whether the user called the set method
+         *   for this attribute. It will be used to determine whether to include this field
+         *   in the serialized XML
+         */
+        protected boolean local_returnTracker = false;
+
+        public boolean is_returnSpecified() {
+            return local_returnTracker;
+        }
+
+        /**
+         * Auto generated getter method
+         * @return Subsection
+         */
+        public Subsection get_return() {
+            return local_return;
+        }
+
+        /**
+         * Auto generated setter method
+         * @param param _return
+         */
+        public void set_return(Subsection param) {
+            local_returnTracker = true;
+
+            this.local_return = param;
+        }
+
+        /**
+         *
+         * @param parentQName
+         * @param factory
+         * @return org.apache.axiom.om.OMElement
+         */
+        public org.apache.axiom.om.OMElement getOMElement(
+            final javax.xml.namespace.QName parentQName,
+            final org.apache.axiom.om.OMFactory factory)
+            throws org.apache.axis2.databinding.ADBException {
+            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
+                    this, MY_QNAME));
+        }
+
+        public void serialize(final javax.xml.namespace.QName parentQName,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException,
+                org.apache.axis2.databinding.ADBException {
+            serialize(parentQName, xmlWriter, false);
+        }
+
+        public void serialize(final javax.xml.namespace.QName parentQName,
+            javax.xml.stream.XMLStreamWriter xmlWriter, boolean serializeType)
+            throws javax.xml.stream.XMLStreamException,
+                org.apache.axis2.databinding.ADBException {
+            java.lang.String prefix = null;
+            java.lang.String namespace = null;
+
+            prefix = parentQName.getPrefix();
+            namespace = parentQName.getNamespaceURI();
+            writeStartElement(prefix, namespace, parentQName.getLocalPart(),
+                xmlWriter);
+
+            if (serializeType) {
+                java.lang.String namespacePrefix = registerPrefix(xmlWriter,
+                        "http://ws.apache.org/axis2");
+
+                if ((namespacePrefix != null) &&
+                        (namespacePrefix.trim().length() > 0)) {
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "type",
+                        namespacePrefix + ":getSubsectionResponse", xmlWriter);
+                } else {
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "type",
+                        "getSubsectionResponse", xmlWriter);
+                }
+            }
+
+            if (local_returnTracker) {
+                if (local_return == null) {
+                    writeStartElement(null, "http://ws.apache.org/axis2",
+                        "return", xmlWriter);
+
+                    // write the nil attribute
+                    writeAttribute("xsi",
+                        "http://www.w3.org/2001/XMLSchema-instance", "nil",
+                        "1", xmlWriter);
+                    xmlWriter.writeEndElement();
+                } else {
+                    local_return.serialize(new javax.xml.namespace.QName(
+                            "http://ws.apache.org/axis2", "return"), xmlWriter);
+                }
+            }
+
+            xmlWriter.writeEndElement();
+        }
+
+        private static java.lang.String generatePrefix(
+            java.lang.String namespace) {
+            if (namespace.equals("http://ws.apache.org/axis2")) {
+                return "ns2";
+            }
+
+            return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+        }
+
+        /**
+         * Utility method to write an element start tag.
+         */
+        private void writeStartElement(java.lang.String prefix,
+            java.lang.String namespace, java.lang.String localPart,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
+
+            if (writerPrefix != null) {
+                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+            } else {
+                if (namespace.length() == 0) {
+                    prefix = "";
+                } else if (prefix == null) {
+                    prefix = generatePrefix(namespace);
+                }
+
+                xmlWriter.writeStartElement(prefix, localPart, namespace);
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+            }
+        }
+
+        /**
+         * Util method to write an attribute with the ns prefix
+         */
+        private void writeAttribute(java.lang.String prefix,
+            java.lang.String namespace, java.lang.String attName,
+            java.lang.String attValue,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
+
+            if (writerPrefix != null) {
+                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
+                    attValue);
+            } else {
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
+            }
+        }
+
+        /**
+         * Util method to write an attribute without the ns prefix
+         */
+        private void writeAttribute(java.lang.String namespace,
+            java.lang.String attName, java.lang.String attValue,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            if (namespace.equals("")) {
+                xmlWriter.writeAttribute(attName, attValue);
+            } else {
+                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
+                    namespace, attName, attValue);
+            }
+        }
+
+        /**
+         * Util method to write an attribute without the ns prefix
+         */
+        private void writeQNameAttribute(java.lang.String namespace,
+            java.lang.String attName, javax.xml.namespace.QName qname,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String attributeNamespace = qname.getNamespaceURI();
+            java.lang.String attributePrefix = xmlWriter.getPrefix(attributeNamespace);
+
+            if (attributePrefix == null) {
+                attributePrefix = registerPrefix(xmlWriter, attributeNamespace);
+            }
+
+            java.lang.String attributeValue;
+
+            if (attributePrefix.trim().length() > 0) {
+                attributeValue = attributePrefix + ":" + qname.getLocalPart();
+            } else {
+                attributeValue = qname.getLocalPart();
+            }
+
+            if (namespace.equals("")) {
+                xmlWriter.writeAttribute(attName, attributeValue);
+            } else {
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
+                    attributeValue);
+            }
+        }
+
+        /**
+         *  method to handle Qnames
+         */
+        private void writeQName(javax.xml.namespace.QName qname,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String namespaceURI = qname.getNamespaceURI();
+
+            if (namespaceURI != null) {
+                java.lang.String prefix = xmlWriter.getPrefix(namespaceURI);
+
+                if (prefix == null) {
+                    prefix = generatePrefix(namespaceURI);
+                    xmlWriter.writeNamespace(prefix, namespaceURI);
+                    xmlWriter.setPrefix(prefix, namespaceURI);
+                }
+
+                if (prefix.trim().length() > 0) {
+                    xmlWriter.writeCharacters(prefix + ":" +
+                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            qname));
+                } else {
+                    // i.e this is the default namespace
+                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            qname));
+                }
+            } else {
+                xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        qname));
+            }
+        }
+
+        private void writeQNames(javax.xml.namespace.QName[] qnames,
+            javax.xml.stream.XMLStreamWriter xmlWriter)
+            throws javax.xml.stream.XMLStreamException {
+            if (qnames != null) {
+                // we have to store this data until last moment since it is not possible to write any
+                // namespace data after writing the charactor data
+                java.lang.StringBuffer stringToWrite = new java.lang.StringBuffer();
+                java.lang.String namespaceURI = null;
+                java.lang.String prefix = null;
+
+                for (int i = 0; i < qnames.length; i++) {
+                    if (i > 0) {
+                        stringToWrite.append(" ");
+                    }
+
+                    namespaceURI = qnames[i].getNamespaceURI();
+
+                    if (namespaceURI != null) {
+                        prefix = xmlWriter.getPrefix(namespaceURI);
+
+                        if ((prefix == null) || (prefix.length() == 0)) {
+                            prefix = generatePrefix(namespaceURI);
+                            xmlWriter.writeNamespace(prefix, namespaceURI);
+                            xmlWriter.setPrefix(prefix, namespaceURI);
+                        }
+
+                        if (prefix.trim().length() > 0) {
+                            stringToWrite.append(prefix).append(":")
+                                         .append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                    qnames[i]));
+                        } else {
+                            stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                    qnames[i]));
+                        }
+                    } else {
+                        stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                qnames[i]));
+                    }
+                }
+
+                xmlWriter.writeCharacters(stringToWrite.toString());
+            }
+        }
+
+        /**
+         * Register a namespace prefix
+         */
+        private java.lang.String registerPrefix(
+            javax.xml.stream.XMLStreamWriter xmlWriter,
+            java.lang.String namespace)
+            throws javax.xml.stream.XMLStreamException {
+            java.lang.String prefix = xmlWriter.getPrefix(namespace);
+
+            if (prefix == null) {
+                prefix = generatePrefix(namespace);
+
+                javax.xml.namespace.NamespaceContext nsContext = xmlWriter.getNamespaceContext();
+
+                while (true) {
+                    java.lang.String uri = nsContext.getNamespaceURI(prefix);
+
+                    if ((uri == null) || (uri.length() == 0)) {
+                        break;
+                    }
+
+                    prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
+                }
+
+                xmlWriter.writeNamespace(prefix, namespace);
+                xmlWriter.setPrefix(prefix, namespace);
+            }
+
+            return prefix;
+        }
+
+        /**
+         *  Factory class that keeps the parse method
+         */
+        public static class Factory {
+            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
+
+            /**
+             * static method to create the object
+             * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
+             *                If this object is not an element, it is a complex type and the reader is at the event just after the outer start element
+             * Postcondition: If this object is an element, the reader is positioned at its end element
+             *                If this object is a complex type, the reader is positioned at the end element of its outer element
+             */
+            public static GetSubsectionResponse parse(
+                javax.xml.stream.XMLStreamReader reader)
+                throws java.lang.Exception {
+                GetSubsectionResponse object = new GetSubsectionResponse();
+
+                int event;
+                javax.xml.namespace.QName currentQName = null;
+                java.lang.String nillableValue = null;
+                java.lang.String prefix = "";
+                java.lang.String namespaceuri = "";
+
+                try {
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    currentQName = reader.getName();
+
+                    if (reader.getAttributeValue(
+                                "http://www.w3.org/2001/XMLSchema-instance",
+                                "type") != null) {
+                        java.lang.String fullTypeName = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                                "type");
+
+                        if (fullTypeName != null) {
+                            java.lang.String nsPrefix = null;
+
+                            if (fullTypeName.indexOf(":") > -1) {
+                                nsPrefix = fullTypeName.substring(0,
+                                        fullTypeName.indexOf(":"));
+                            }
+
+                            nsPrefix = (nsPrefix == null) ? "" : nsPrefix;
+
+                            java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
+                                        ":") + 1);
+
+                            if (!"getSubsectionResponse".equals(type)) {
+                                //find namespace for the prefix
+                                java.lang.String nsUri = reader.getNamespaceContext()
+                                                               .getNamespaceURI(nsPrefix);
+
+                                return (GetSubsectionResponse) ExtensionMapper.getTypeObject(nsUri,
+                                    type, reader);
+                            }
+                        }
+                    }
+
+                    // Note all attributes that were handled. Used to differ normal attributes
+                    // from anyAttributes.
+                    java.util.Vector handledAttributes = new java.util.Vector();
+
+                    reader.next();
+
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    if (reader.isStartElement() &&
+                            new javax.xml.namespace.QName(
+                                "http://ws.apache.org/axis2", "return").equals(
+                                reader.getName())) {
+                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                                "nil");
+
+                        if ("true".equals(nillableValue) ||
+                                "1".equals(nillableValue)) {
+                            object.set_return(null);
+                            reader.next();
+
+                            reader.next();
+                        } else {
+                            object.set_return(Subsection.Factory.parse(reader));
+
+                            reader.next();
+                        }
                     } // End of if for expected property start element
 
                     else {
@@ -3502,426 +5917,6 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
         } //end of factory class
     }
 
-    public static class AddSection implements org.apache.axis2.databinding.ADBBean {
-        public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://ws.apache.org/axis2",
-                "addSection", "ns2");
-
-        /**
-         * field for Section
-         */
-        protected Section localSection;
-
-        /*  This tracker boolean wil be used to detect whether the user called the set method
-         *   for this attribute. It will be used to determine whether to include this field
-         *   in the serialized XML
-         */
-        protected boolean localSectionTracker = false;
-
-        public boolean isSectionSpecified() {
-            return localSectionTracker;
-        }
-
-        /**
-         * Auto generated getter method
-         * @return Section
-         */
-        public Section getSection() {
-            return localSection;
-        }
-
-        /**
-         * Auto generated setter method
-         * @param param Section
-         */
-        public void setSection(Section param) {
-            localSectionTracker = true;
-
-            this.localSection = param;
-        }
-
-        /**
-         *
-         * @param parentQName
-         * @param factory
-         * @return org.apache.axiom.om.OMElement
-         */
-        public org.apache.axiom.om.OMElement getOMElement(
-            final javax.xml.namespace.QName parentQName,
-            final org.apache.axiom.om.OMFactory factory)
-            throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
-        }
-
-        public void serialize(final javax.xml.namespace.QName parentQName,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException,
-                org.apache.axis2.databinding.ADBException {
-            serialize(parentQName, xmlWriter, false);
-        }
-
-        public void serialize(final javax.xml.namespace.QName parentQName,
-            javax.xml.stream.XMLStreamWriter xmlWriter, boolean serializeType)
-            throws javax.xml.stream.XMLStreamException,
-                org.apache.axis2.databinding.ADBException {
-            java.lang.String prefix = null;
-            java.lang.String namespace = null;
-
-            prefix = parentQName.getPrefix();
-            namespace = parentQName.getNamespaceURI();
-            writeStartElement(prefix, namespace, parentQName.getLocalPart(),
-                xmlWriter);
-
-            if (serializeType) {
-                java.lang.String namespacePrefix = registerPrefix(xmlWriter,
-                        "http://ws.apache.org/axis2");
-
-                if ((namespacePrefix != null) &&
-                        (namespacePrefix.trim().length() > 0)) {
-                    writeAttribute("xsi",
-                        "http://www.w3.org/2001/XMLSchema-instance", "type",
-                        namespacePrefix + ":addSection", xmlWriter);
-                } else {
-                    writeAttribute("xsi",
-                        "http://www.w3.org/2001/XMLSchema-instance", "type",
-                        "addSection", xmlWriter);
-                }
-            }
-
-            if (localSectionTracker) {
-                if (localSection == null) {
-                    writeStartElement(null, "http://ws.apache.org/axis2",
-                        "section", xmlWriter);
-
-                    // write the nil attribute
-                    writeAttribute("xsi",
-                        "http://www.w3.org/2001/XMLSchema-instance", "nil",
-                        "1", xmlWriter);
-                    xmlWriter.writeEndElement();
-                } else {
-                    localSection.serialize(new javax.xml.namespace.QName(
-                            "http://ws.apache.org/axis2", "section"), xmlWriter);
-                }
-            }
-
-            xmlWriter.writeEndElement();
-        }
-
-        private static java.lang.String generatePrefix(
-            java.lang.String namespace) {
-            if (namespace.equals("http://ws.apache.org/axis2")) {
-                return "ns2";
-            }
-
-            return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
-        }
-
-        /**
-         * Utility method to write an element start tag.
-         */
-        private void writeStartElement(java.lang.String prefix,
-            java.lang.String namespace, java.lang.String localPart,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
-            } else {
-                if (namespace.length() == 0) {
-                    prefix = "";
-                } else if (prefix == null) {
-                    prefix = generatePrefix(namespace);
-                }
-
-                xmlWriter.writeStartElement(prefix, localPart, namespace);
-                xmlWriter.writeNamespace(prefix, namespace);
-                xmlWriter.setPrefix(prefix, namespace);
-            }
-        }
-
-        /**
-         * Util method to write an attribute with the ns prefix
-         */
-        private void writeAttribute(java.lang.String prefix,
-            java.lang.String namespace, java.lang.String attName,
-            java.lang.String attValue,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
-                xmlWriter.writeNamespace(prefix, namespace);
-                xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
-            }
-        }
-
-        /**
-         * Util method to write an attribute without the ns prefix
-         */
-        private void writeAttribute(java.lang.String namespace,
-            java.lang.String attName, java.lang.String attValue,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            if (namespace.equals("")) {
-                xmlWriter.writeAttribute(attName, attValue);
-            } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
-            }
-        }
-
-        /**
-         * Util method to write an attribute without the ns prefix
-         */
-        private void writeQNameAttribute(java.lang.String namespace,
-            java.lang.String attName, javax.xml.namespace.QName qname,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            java.lang.String attributeNamespace = qname.getNamespaceURI();
-            java.lang.String attributePrefix = xmlWriter.getPrefix(attributeNamespace);
-
-            if (attributePrefix == null) {
-                attributePrefix = registerPrefix(xmlWriter, attributeNamespace);
-            }
-
-            java.lang.String attributeValue;
-
-            if (attributePrefix.trim().length() > 0) {
-                attributeValue = attributePrefix + ":" + qname.getLocalPart();
-            } else {
-                attributeValue = qname.getLocalPart();
-            }
-
-            if (namespace.equals("")) {
-                xmlWriter.writeAttribute(attName, attributeValue);
-            } else {
-                registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
-            }
-        }
-
-        /**
-         *  method to handle Qnames
-         */
-        private void writeQName(javax.xml.namespace.QName qname,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            java.lang.String namespaceURI = qname.getNamespaceURI();
-
-            if (namespaceURI != null) {
-                java.lang.String prefix = xmlWriter.getPrefix(namespaceURI);
-
-                if (prefix == null) {
-                    prefix = generatePrefix(namespaceURI);
-                    xmlWriter.writeNamespace(prefix, namespaceURI);
-                    xmlWriter.setPrefix(prefix, namespaceURI);
-                }
-
-                if (prefix.trim().length() > 0) {
-                    xmlWriter.writeCharacters(prefix + ":" +
-                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                            qname));
-                } else {
-                    // i.e this is the default namespace
-                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                            qname));
-                }
-            } else {
-                xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                        qname));
-            }
-        }
-
-        private void writeQNames(javax.xml.namespace.QName[] qnames,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            if (qnames != null) {
-                // we have to store this data until last moment since it is not possible to write any
-                // namespace data after writing the charactor data
-                java.lang.StringBuffer stringToWrite = new java.lang.StringBuffer();
-                java.lang.String namespaceURI = null;
-                java.lang.String prefix = null;
-
-                for (int i = 0; i < qnames.length; i++) {
-                    if (i > 0) {
-                        stringToWrite.append(" ");
-                    }
-
-                    namespaceURI = qnames[i].getNamespaceURI();
-
-                    if (namespaceURI != null) {
-                        prefix = xmlWriter.getPrefix(namespaceURI);
-
-                        if ((prefix == null) || (prefix.length() == 0)) {
-                            prefix = generatePrefix(namespaceURI);
-                            xmlWriter.writeNamespace(prefix, namespaceURI);
-                            xmlWriter.setPrefix(prefix, namespaceURI);
-                        }
-
-                        if (prefix.trim().length() > 0) {
-                            stringToWrite.append(prefix).append(":")
-                                         .append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                                    qnames[i]));
-                        } else {
-                            stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                                    qnames[i]));
-                        }
-                    } else {
-                        stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                                qnames[i]));
-                    }
-                }
-
-                xmlWriter.writeCharacters(stringToWrite.toString());
-            }
-        }
-
-        /**
-         * Register a namespace prefix
-         */
-        private java.lang.String registerPrefix(
-            javax.xml.stream.XMLStreamWriter xmlWriter,
-            java.lang.String namespace)
-            throws javax.xml.stream.XMLStreamException {
-            java.lang.String prefix = xmlWriter.getPrefix(namespace);
-
-            if (prefix == null) {
-                prefix = generatePrefix(namespace);
-
-                javax.xml.namespace.NamespaceContext nsContext = xmlWriter.getNamespaceContext();
-
-                while (true) {
-                    java.lang.String uri = nsContext.getNamespaceURI(prefix);
-
-                    if ((uri == null) || (uri.length() == 0)) {
-                        break;
-                    }
-
-                    prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
-                }
-
-                xmlWriter.writeNamespace(prefix, namespace);
-                xmlWriter.setPrefix(prefix, namespace);
-            }
-
-            return prefix;
-        }
-
-        /**
-         *  Factory class that keeps the parse method
-         */
-        public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
-            /**
-             * static method to create the object
-             * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
-             *                If this object is not an element, it is a complex type and the reader is at the event just after the outer start element
-             * Postcondition: If this object is an element, the reader is positioned at its end element
-             *                If this object is a complex type, the reader is positioned at the end element of its outer element
-             */
-            public static AddSection parse(
-                javax.xml.stream.XMLStreamReader reader)
-                throws java.lang.Exception {
-                AddSection object = new AddSection();
-
-                int event;
-                javax.xml.namespace.QName currentQName = null;
-                java.lang.String nillableValue = null;
-                java.lang.String prefix = "";
-                java.lang.String namespaceuri = "";
-
-                try {
-                    while (!reader.isStartElement() && !reader.isEndElement())
-                        reader.next();
-
-                    currentQName = reader.getName();
-
-                    if (reader.getAttributeValue(
-                                "http://www.w3.org/2001/XMLSchema-instance",
-                                "type") != null) {
-                        java.lang.String fullTypeName = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-                                "type");
-
-                        if (fullTypeName != null) {
-                            java.lang.String nsPrefix = null;
-
-                            if (fullTypeName.indexOf(":") > -1) {
-                                nsPrefix = fullTypeName.substring(0,
-                                        fullTypeName.indexOf(":"));
-                            }
-
-                            nsPrefix = (nsPrefix == null) ? "" : nsPrefix;
-
-                            java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
-                                        ":") + 1);
-
-                            if (!"addSection".equals(type)) {
-                                //find namespace for the prefix
-                                java.lang.String nsUri = reader.getNamespaceContext()
-                                                               .getNamespaceURI(nsPrefix);
-
-                                return (AddSection) ExtensionMapper.getTypeObject(nsUri,
-                                    type, reader);
-                            }
-                        }
-                    }
-
-                    // Note all attributes that were handled. Used to differ normal attributes
-                    // from anyAttributes.
-                    java.util.Vector handledAttributes = new java.util.Vector();
-
-                    reader.next();
-
-                    while (!reader.isStartElement() && !reader.isEndElement())
-                        reader.next();
-
-                    if (reader.isStartElement() &&
-                            new javax.xml.namespace.QName(
-                                "http://ws.apache.org/axis2", "section").equals(
-                                reader.getName())) {
-                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-                                "nil");
-
-                        if ("true".equals(nillableValue) ||
-                                "1".equals(nillableValue)) {
-                            object.setSection(null);
-                            reader.next();
-
-                            reader.next();
-                        } else {
-                            object.setSection(Section.Factory.parse(reader));
-
-                            reader.next();
-                        }
-                    } // End of if for expected property start element
-
-                    else {
-                    }
-
-                    while (!reader.isStartElement() && !reader.isEndElement())
-                        reader.next();
-
-                    if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
-                        throw new org.apache.axis2.databinding.ADBException(
-                            "Unexpected subelement " + reader.getName());
-                    }
-                } catch (javax.xml.stream.XMLStreamException e) {
-                    throw new java.lang.Exception(e);
-                }
-
-                return object;
-            }
-        } //end of factory class
-    }
-
     public static class UpdateSubsection implements org.apache.axis2.databinding.ADBBean {
         public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://ws.apache.org/axis2",
                 "updateSubsection", "ns2");
@@ -4419,74 +6414,103 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
         } //end of factory class
     }
 
-    public static class AddSubsection implements org.apache.axis2.databinding.ADBBean {
-        public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://ws.apache.org/axis2",
-                "addSubsection", "ns2");
+    public static class JsRefference implements org.apache.axis2.databinding.ADBBean {
+        /* This type was generated from the piece of schema that had
+           name = JsRefference
+           Namespace URI = http://ws.apache.org/axis2/xsd
+           Namespace Prefix = ns1
+         */
 
         /**
-         * field for SectionName
+         * field for Author
          */
-        protected java.lang.String localSectionName;
+        protected Author localAuthor;
 
         /*  This tracker boolean wil be used to detect whether the user called the set method
          *   for this attribute. It will be used to determine whether to include this field
          *   in the serialized XML
          */
-        protected boolean localSectionNameTracker = false;
+        protected boolean localAuthorTracker = false;
 
         /**
-         * field for Subsection
+         * field for SectionList
+         * This was an Array!
          */
-        protected Subsection localSubsection;
+        protected Section[] localSectionList;
 
         /*  This tracker boolean wil be used to detect whether the user called the set method
          *   for this attribute. It will be used to determine whether to include this field
          *   in the serialized XML
          */
-        protected boolean localSubsectionTracker = false;
+        protected boolean localSectionListTracker = false;
 
-        public boolean isSectionNameSpecified() {
-            return localSectionNameTracker;
+        public boolean isAuthorSpecified() {
+            return localAuthorTracker;
         }
 
         /**
          * Auto generated getter method
-         * @return java.lang.String
+         * @return Author
          */
-        public java.lang.String getSectionName() {
-            return localSectionName;
+        public Author getAuthor() {
+            return localAuthor;
         }
 
         /**
          * Auto generated setter method
-         * @param param SectionName
+         * @param param Author
          */
-        public void setSectionName(java.lang.String param) {
-            localSectionNameTracker = true;
+        public void setAuthor(Author param) {
+            localAuthorTracker = true;
 
-            this.localSectionName = param;
+            this.localAuthor = param;
         }
 
-        public boolean isSubsectionSpecified() {
-            return localSubsectionTracker;
+        public boolean isSectionListSpecified() {
+            return localSectionListTracker;
         }
 
         /**
          * Auto generated getter method
-         * @return Subsection
+         * @return Section[]
          */
-        public Subsection getSubsection() {
-            return localSubsection;
+        public Section[] getSectionList() {
+            return localSectionList;
+        }
+
+        /**
+         * validate the array for SectionList
+         */
+        protected void validateSectionList(Section[] param) {
         }
 
         /**
          * Auto generated setter method
-         * @param param Subsection
+         * @param param SectionList
          */
-        public void setSubsection(Subsection param) {
-            localSubsectionTracker = true;
+        public void setSectionList(Section[] param) {
+            validateSectionList(param);
 
-            this.localSubsection = param;
+            localSectionListTracker = true;
+
+            this.localSectionList = param;
+        }
+
+        /**
+         * Auto generated add method for the array for convenience
+         * @param param Section
+         */
+        public void addSectionList(Section param) {
+            if (localSectionList == null) {
+                localSectionList = new Section[] {  };
+            }
+
+            //update the setting tracker
+            localSectionListTracker = true;
+
+            java.util.List list = org.apache.axis2.databinding.utils.ConverterUtil.toList(localSectionList);
+            list.add(param);
+            this.localSectionList = (Section[]) list.toArray(new Section[list.size()]);
         }
 
         /**
@@ -4500,7 +6524,7 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
             return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+                    this, parentQName));
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -4524,40 +6548,24 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
 
             if (serializeType) {
                 java.lang.String namespacePrefix = registerPrefix(xmlWriter,
-                        "http://ws.apache.org/axis2");
+                        "http://ws.apache.org/axis2/xsd");
 
                 if ((namespacePrefix != null) &&
                         (namespacePrefix.trim().length() > 0)) {
                     writeAttribute("xsi",
                         "http://www.w3.org/2001/XMLSchema-instance", "type",
-                        namespacePrefix + ":addSubsection", xmlWriter);
+                        namespacePrefix + ":JsRefference", xmlWriter);
                 } else {
                     writeAttribute("xsi",
                         "http://www.w3.org/2001/XMLSchema-instance", "type",
-                        "addSubsection", xmlWriter);
+                        "JsRefference", xmlWriter);
                 }
             }
 
-            if (localSectionNameTracker) {
-                namespace = "http://ws.apache.org/axis2";
-                writeStartElement(null, namespace, "sectionName", xmlWriter);
-
-                if (localSectionName == null) {
-                    // write the nil attribute
-                    writeAttribute("xsi",
-                        "http://www.w3.org/2001/XMLSchema-instance", "nil",
-                        "1", xmlWriter);
-                } else {
-                    xmlWriter.writeCharacters(localSectionName);
-                }
-
-                xmlWriter.writeEndElement();
-            }
-
-            if (localSubsectionTracker) {
-                if (localSubsection == null) {
-                    writeStartElement(null, "http://ws.apache.org/axis2",
-                        "subsection", xmlWriter);
+            if (localAuthorTracker) {
+                if (localAuthor == null) {
+                    writeStartElement(null, "http://ws.apache.org/axis2/xsd",
+                        "author", xmlWriter);
 
                     // write the nil attribute
                     writeAttribute("xsi",
@@ -4565,480 +6573,23 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
                         "1", xmlWriter);
                     xmlWriter.writeEndElement();
                 } else {
-                    localSubsection.serialize(new javax.xml.namespace.QName(
-                            "http://ws.apache.org/axis2", "subsection"),
+                    localAuthor.serialize(new javax.xml.namespace.QName(
+                            "http://ws.apache.org/axis2/xsd", "author"),
                         xmlWriter);
                 }
             }
 
-            xmlWriter.writeEndElement();
-        }
-
-        private static java.lang.String generatePrefix(
-            java.lang.String namespace) {
-            if (namespace.equals("http://ws.apache.org/axis2")) {
-                return "ns2";
-            }
-
-            return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
-        }
-
-        /**
-         * Utility method to write an element start tag.
-         */
-        private void writeStartElement(java.lang.String prefix,
-            java.lang.String namespace, java.lang.String localPart,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
-            } else {
-                if (namespace.length() == 0) {
-                    prefix = "";
-                } else if (prefix == null) {
-                    prefix = generatePrefix(namespace);
-                }
-
-                xmlWriter.writeStartElement(prefix, localPart, namespace);
-                xmlWriter.writeNamespace(prefix, namespace);
-                xmlWriter.setPrefix(prefix, namespace);
-            }
-        }
-
-        /**
-         * Util method to write an attribute with the ns prefix
-         */
-        private void writeAttribute(java.lang.String prefix,
-            java.lang.String namespace, java.lang.String attName,
-            java.lang.String attValue,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
-                xmlWriter.writeNamespace(prefix, namespace);
-                xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
-            }
-        }
-
-        /**
-         * Util method to write an attribute without the ns prefix
-         */
-        private void writeAttribute(java.lang.String namespace,
-            java.lang.String attName, java.lang.String attValue,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            if (namespace.equals("")) {
-                xmlWriter.writeAttribute(attName, attValue);
-            } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
-            }
-        }
-
-        /**
-         * Util method to write an attribute without the ns prefix
-         */
-        private void writeQNameAttribute(java.lang.String namespace,
-            java.lang.String attName, javax.xml.namespace.QName qname,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            java.lang.String attributeNamespace = qname.getNamespaceURI();
-            java.lang.String attributePrefix = xmlWriter.getPrefix(attributeNamespace);
-
-            if (attributePrefix == null) {
-                attributePrefix = registerPrefix(xmlWriter, attributeNamespace);
-            }
-
-            java.lang.String attributeValue;
-
-            if (attributePrefix.trim().length() > 0) {
-                attributeValue = attributePrefix + ":" + qname.getLocalPart();
-            } else {
-                attributeValue = qname.getLocalPart();
-            }
-
-            if (namespace.equals("")) {
-                xmlWriter.writeAttribute(attName, attributeValue);
-            } else {
-                registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
-            }
-        }
-
-        /**
-         *  method to handle Qnames
-         */
-        private void writeQName(javax.xml.namespace.QName qname,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            java.lang.String namespaceURI = qname.getNamespaceURI();
-
-            if (namespaceURI != null) {
-                java.lang.String prefix = xmlWriter.getPrefix(namespaceURI);
-
-                if (prefix == null) {
-                    prefix = generatePrefix(namespaceURI);
-                    xmlWriter.writeNamespace(prefix, namespaceURI);
-                    xmlWriter.setPrefix(prefix, namespaceURI);
-                }
-
-                if (prefix.trim().length() > 0) {
-                    xmlWriter.writeCharacters(prefix + ":" +
-                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                            qname));
-                } else {
-                    // i.e this is the default namespace
-                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                            qname));
-                }
-            } else {
-                xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                        qname));
-            }
-        }
-
-        private void writeQNames(javax.xml.namespace.QName[] qnames,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            if (qnames != null) {
-                // we have to store this data until last moment since it is not possible to write any
-                // namespace data after writing the charactor data
-                java.lang.StringBuffer stringToWrite = new java.lang.StringBuffer();
-                java.lang.String namespaceURI = null;
-                java.lang.String prefix = null;
-
-                for (int i = 0; i < qnames.length; i++) {
-                    if (i > 0) {
-                        stringToWrite.append(" ");
-                    }
-
-                    namespaceURI = qnames[i].getNamespaceURI();
-
-                    if (namespaceURI != null) {
-                        prefix = xmlWriter.getPrefix(namespaceURI);
-
-                        if ((prefix == null) || (prefix.length() == 0)) {
-                            prefix = generatePrefix(namespaceURI);
-                            xmlWriter.writeNamespace(prefix, namespaceURI);
-                            xmlWriter.setPrefix(prefix, namespaceURI);
-                        }
-
-                        if (prefix.trim().length() > 0) {
-                            stringToWrite.append(prefix).append(":")
-                                         .append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                                    qnames[i]));
-                        } else {
-                            stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                                    qnames[i]));
-                        }
-                    } else {
-                        stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                                qnames[i]));
-                    }
-                }
-
-                xmlWriter.writeCharacters(stringToWrite.toString());
-            }
-        }
-
-        /**
-         * Register a namespace prefix
-         */
-        private java.lang.String registerPrefix(
-            javax.xml.stream.XMLStreamWriter xmlWriter,
-            java.lang.String namespace)
-            throws javax.xml.stream.XMLStreamException {
-            java.lang.String prefix = xmlWriter.getPrefix(namespace);
-
-            if (prefix == null) {
-                prefix = generatePrefix(namespace);
-
-                javax.xml.namespace.NamespaceContext nsContext = xmlWriter.getNamespaceContext();
-
-                while (true) {
-                    java.lang.String uri = nsContext.getNamespaceURI(prefix);
-
-                    if ((uri == null) || (uri.length() == 0)) {
-                        break;
-                    }
-
-                    prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
-                }
-
-                xmlWriter.writeNamespace(prefix, namespace);
-                xmlWriter.setPrefix(prefix, namespace);
-            }
-
-            return prefix;
-        }
-
-        /**
-         *  Factory class that keeps the parse method
-         */
-        public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
-            /**
-             * static method to create the object
-             * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
-             *                If this object is not an element, it is a complex type and the reader is at the event just after the outer start element
-             * Postcondition: If this object is an element, the reader is positioned at its end element
-             *                If this object is a complex type, the reader is positioned at the end element of its outer element
-             */
-            public static AddSubsection parse(
-                javax.xml.stream.XMLStreamReader reader)
-                throws java.lang.Exception {
-                AddSubsection object = new AddSubsection();
-
-                int event;
-                javax.xml.namespace.QName currentQName = null;
-                java.lang.String nillableValue = null;
-                java.lang.String prefix = "";
-                java.lang.String namespaceuri = "";
-
-                try {
-                    while (!reader.isStartElement() && !reader.isEndElement())
-                        reader.next();
-
-                    currentQName = reader.getName();
-
-                    if (reader.getAttributeValue(
-                                "http://www.w3.org/2001/XMLSchema-instance",
-                                "type") != null) {
-                        java.lang.String fullTypeName = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-                                "type");
-
-                        if (fullTypeName != null) {
-                            java.lang.String nsPrefix = null;
-
-                            if (fullTypeName.indexOf(":") > -1) {
-                                nsPrefix = fullTypeName.substring(0,
-                                        fullTypeName.indexOf(":"));
-                            }
-
-                            nsPrefix = (nsPrefix == null) ? "" : nsPrefix;
-
-                            java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
-                                        ":") + 1);
-
-                            if (!"addSubsection".equals(type)) {
-                                //find namespace for the prefix
-                                java.lang.String nsUri = reader.getNamespaceContext()
-                                                               .getNamespaceURI(nsPrefix);
-
-                                return (AddSubsection) ExtensionMapper.getTypeObject(nsUri,
-                                    type, reader);
-                            }
-                        }
-                    }
-
-                    // Note all attributes that were handled. Used to differ normal attributes
-                    // from anyAttributes.
-                    java.util.Vector handledAttributes = new java.util.Vector();
-
-                    reader.next();
-
-                    while (!reader.isStartElement() && !reader.isEndElement())
-                        reader.next();
-
-                    if (reader.isStartElement() &&
-                            new javax.xml.namespace.QName(
-                                "http://ws.apache.org/axis2", "sectionName").equals(
-                                reader.getName())) {
-                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-                                "nil");
-
-                        if (!"true".equals(nillableValue) &&
-                                !"1".equals(nillableValue)) {
-                            java.lang.String content = reader.getElementText();
-
-                            object.setSectionName(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                                    content));
-                        } else {
-                            reader.getElementText(); // throw away text nodes if any.
-                        }
-
-                        reader.next();
-                    } // End of if for expected property start element
-
-                    else {
-                    }
-
-                    while (!reader.isStartElement() && !reader.isEndElement())
-                        reader.next();
-
-                    if (reader.isStartElement() &&
-                            new javax.xml.namespace.QName(
-                                "http://ws.apache.org/axis2", "subsection").equals(
-                                reader.getName())) {
-                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-                                "nil");
-
-                        if ("true".equals(nillableValue) ||
-                                "1".equals(nillableValue)) {
-                            object.setSubsection(null);
-                            reader.next();
-
-                            reader.next();
-                        } else {
-                            object.setSubsection(Subsection.Factory.parse(
-                                    reader));
-
-                            reader.next();
-                        }
-                    } // End of if for expected property start element
-
-                    else {
-                    }
-
-                    while (!reader.isStartElement() && !reader.isEndElement())
-                        reader.next();
-
-                    if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
-                        throw new org.apache.axis2.databinding.ADBException(
-                            "Unexpected subelement " + reader.getName());
-                    }
-                } catch (javax.xml.stream.XMLStreamException e) {
-                    throw new java.lang.Exception(e);
-                }
-
-                return object;
-            }
-        } //end of factory class
-    }
-
-    public static class GetSectionsResponse implements org.apache.axis2.databinding.ADBBean {
-        public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://ws.apache.org/axis2",
-                "getSectionsResponse", "ns2");
-
-        /**
-         * field for _return
-         * This was an Array!
-         */
-        protected Section[] local_return;
-
-        /*  This tracker boolean wil be used to detect whether the user called the set method
-         *   for this attribute. It will be used to determine whether to include this field
-         *   in the serialized XML
-         */
-        protected boolean local_returnTracker = false;
-
-        public boolean is_returnSpecified() {
-            return local_returnTracker;
-        }
-
-        /**
-         * Auto generated getter method
-         * @return Section[]
-         */
-        public Section[] get_return() {
-            return local_return;
-        }
-
-        /**
-         * validate the array for _return
-         */
-        protected void validate_return(Section[] param) {
-        }
-
-        /**
-         * Auto generated setter method
-         * @param param _return
-         */
-        public void set_return(Section[] param) {
-            validate_return(param);
-
-            local_returnTracker = true;
-
-            this.local_return = param;
-        }
-
-        /**
-         * Auto generated add method for the array for convenience
-         * @param param Section
-         */
-        public void add_return(Section param) {
-            if (local_return == null) {
-                local_return = new Section[] {  };
-            }
-
-            //update the setting tracker
-            local_returnTracker = true;
-
-            java.util.List list = org.apache.axis2.databinding.utils.ConverterUtil.toList(local_return);
-            list.add(param);
-            this.local_return = (Section[]) list.toArray(new Section[list.size()]);
-        }
-
-        /**
-         *
-         * @param parentQName
-         * @param factory
-         * @return org.apache.axiom.om.OMElement
-         */
-        public org.apache.axiom.om.OMElement getOMElement(
-            final javax.xml.namespace.QName parentQName,
-            final org.apache.axiom.om.OMFactory factory)
-            throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
-        }
-
-        public void serialize(final javax.xml.namespace.QName parentQName,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException,
-                org.apache.axis2.databinding.ADBException {
-            serialize(parentQName, xmlWriter, false);
-        }
-
-        public void serialize(final javax.xml.namespace.QName parentQName,
-            javax.xml.stream.XMLStreamWriter xmlWriter, boolean serializeType)
-            throws javax.xml.stream.XMLStreamException,
-                org.apache.axis2.databinding.ADBException {
-            java.lang.String prefix = null;
-            java.lang.String namespace = null;
-
-            prefix = parentQName.getPrefix();
-            namespace = parentQName.getNamespaceURI();
-            writeStartElement(prefix, namespace, parentQName.getLocalPart(),
-                xmlWriter);
-
-            if (serializeType) {
-                java.lang.String namespacePrefix = registerPrefix(xmlWriter,
-                        "http://ws.apache.org/axis2");
-
-                if ((namespacePrefix != null) &&
-                        (namespacePrefix.trim().length() > 0)) {
-                    writeAttribute("xsi",
-                        "http://www.w3.org/2001/XMLSchema-instance", "type",
-                        namespacePrefix + ":getSectionsResponse", xmlWriter);
-                } else {
-                    writeAttribute("xsi",
-                        "http://www.w3.org/2001/XMLSchema-instance", "type",
-                        "getSectionsResponse", xmlWriter);
-                }
-            }
-
-            if (local_returnTracker) {
-                if (local_return != null) {
-                    for (int i = 0; i < local_return.length; i++) {
-                        if (local_return[i] != null) {
-                            local_return[i].serialize(new javax.xml.namespace.QName(
-                                    "http://ws.apache.org/axis2", "return"),
-                                xmlWriter);
+            if (localSectionListTracker) {
+                if (localSectionList != null) {
+                    for (int i = 0; i < localSectionList.length; i++) {
+                        if (localSectionList[i] != null) {
+                            localSectionList[i].serialize(new javax.xml.namespace.QName(
+                                    "http://ws.apache.org/axis2/xsd",
+                                    "sectionList"), xmlWriter);
                         } else {
                             writeStartElement(null,
-                                "http://ws.apache.org/axis2", "return",
-                                xmlWriter);
+                                "http://ws.apache.org/axis2/xsd",
+                                "sectionList", xmlWriter);
 
                             // write the nil attribute
                             writeAttribute("xsi",
@@ -5048,8 +6599,8 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
                         }
                     }
                 } else {
-                    writeStartElement(null, "http://ws.apache.org/axis2",
-                        "return", xmlWriter);
+                    writeStartElement(null, "http://ws.apache.org/axis2/xsd",
+                        "sectionList", xmlWriter);
 
                     // write the nil attribute
                     writeAttribute("xsi",
@@ -5064,8 +6615,8 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
 
         private static java.lang.String generatePrefix(
             java.lang.String namespace) {
-            if (namespace.equals("http://ws.apache.org/axis2")) {
-                return "ns2";
+            if (namespace.equals("http://ws.apache.org/axis2/xsd")) {
+                return "ns1";
             }
 
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
@@ -5281,10 +6832,10 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
              * Postcondition: If this object is an element, the reader is positioned at its end element
              *                If this object is a complex type, the reader is positioned at the end element of its outer element
              */
-            public static GetSectionsResponse parse(
+            public static JsRefference parse(
                 javax.xml.stream.XMLStreamReader reader)
                 throws java.lang.Exception {
-                GetSectionsResponse object = new GetSectionsResponse();
+                JsRefference object = new JsRefference();
 
                 int event;
                 javax.xml.namespace.QName currentQName = null;
@@ -5317,12 +6868,12 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
                             java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
                                         ":") + 1);
 
-                            if (!"getSectionsResponse".equals(type)) {
+                            if (!"JsRefference".equals(type)) {
                                 //find namespace for the prefix
                                 java.lang.String nsUri = reader.getNamespaceContext()
                                                                .getNamespaceURI(nsPrefix);
 
-                                return (GetSectionsResponse) ExtensionMapper.getTypeObject(nsUri,
+                                return (JsRefference) ExtensionMapper.getTypeObject(nsUri,
                                     type, reader);
                             }
                         }
@@ -5334,14 +6885,40 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
 
                     reader.next();
 
-                    java.util.ArrayList list1 = new java.util.ArrayList();
+                    java.util.ArrayList list2 = new java.util.ArrayList();
 
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
 
                     if (reader.isStartElement() &&
                             new javax.xml.namespace.QName(
-                                "http://ws.apache.org/axis2", "return").equals(
+                                "http://ws.apache.org/axis2/xsd", "author").equals(
+                                reader.getName())) {
+                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
+                                "nil");
+
+                        if ("true".equals(nillableValue) ||
+                                "1".equals(nillableValue)) {
+                            object.setAuthor(null);
+                            reader.next();
+
+                            reader.next();
+                        } else {
+                            object.setAuthor(Author.Factory.parse(reader));
+
+                            reader.next();
+                        }
+                    } // End of if for expected property start element
+
+                    else {
+                    }
+
+                    while (!reader.isStartElement() && !reader.isEndElement())
+                        reader.next();
+
+                    if (reader.isStartElement() &&
+                            new javax.xml.namespace.QName(
+                                "http://ws.apache.org/axis2/xsd", "sectionList").equals(
                                 reader.getName())) {
                         // Process the array and step past its final element's end.
                         nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
@@ -5349,16 +6926,16 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
 
                         if ("true".equals(nillableValue) ||
                                 "1".equals(nillableValue)) {
-                            list1.add(null);
+                            list2.add(null);
                             reader.next();
                         } else {
-                            list1.add(Section.Factory.parse(reader));
+                            list2.add(Section.Factory.parse(reader));
                         }
 
                         //loop until we find a start element that is not part of this array
-                        boolean loopDone1 = false;
+                        boolean loopDone2 = false;
 
-                        while (!loopDone1) {
+                        while (!loopDone2) {
                             // We should be at the end element, but make sure
                             while (!reader.isEndElement())
                                 reader.next();
@@ -5373,525 +6950,31 @@ public class CustomServiceStub extends org.apache.axis2.client.Stub {
 
                             if (reader.isEndElement()) {
                                 //two continuous end elements means we are exiting the xml structure
-                                loopDone1 = true;
+                                loopDone2 = true;
                             } else {
                                 if (new javax.xml.namespace.QName(
-                                            "http://ws.apache.org/axis2",
-                                            "return").equals(reader.getName())) {
+                                            "http://ws.apache.org/axis2/xsd",
+                                            "sectionList").equals(
+                                            reader.getName())) {
                                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                                             "nil");
 
                                     if ("true".equals(nillableValue) ||
                                             "1".equals(nillableValue)) {
-                                        list1.add(null);
+                                        list2.add(null);
                                         reader.next();
                                     } else {
-                                        list1.add(Section.Factory.parse(reader));
+                                        list2.add(Section.Factory.parse(reader));
                                     }
                                 } else {
-                                    loopDone1 = true;
+                                    loopDone2 = true;
                                 }
                             }
                         }
 
                         // call the converter utility  to convert and set the array
-                        object.set_return((Section[]) org.apache.axis2.databinding.utils.ConverterUtil.convertToArray(
-                                Section.class, list1));
-                    } // End of if for expected property start element
-
-                    else {
-                    }
-
-                    while (!reader.isStartElement() && !reader.isEndElement())
-                        reader.next();
-
-                    if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
-                        throw new org.apache.axis2.databinding.ADBException(
-                            "Unexpected subelement " + reader.getName());
-                    }
-                } catch (javax.xml.stream.XMLStreamException e) {
-                    throw new java.lang.Exception(e);
-                }
-
-                return object;
-            }
-        } //end of factory class
-    }
-
-    public static class GetSubsection implements org.apache.axis2.databinding.ADBBean {
-        public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName("http://ws.apache.org/axis2",
-                "getSubsection", "ns2");
-
-        /**
-         * field for SectionName
-         */
-        protected java.lang.String localSectionName;
-
-        /*  This tracker boolean wil be used to detect whether the user called the set method
-         *   for this attribute. It will be used to determine whether to include this field
-         *   in the serialized XML
-         */
-        protected boolean localSectionNameTracker = false;
-
-        /**
-         * field for SubsectionName
-         */
-        protected java.lang.String localSubsectionName;
-
-        /*  This tracker boolean wil be used to detect whether the user called the set method
-         *   for this attribute. It will be used to determine whether to include this field
-         *   in the serialized XML
-         */
-        protected boolean localSubsectionNameTracker = false;
-
-        public boolean isSectionNameSpecified() {
-            return localSectionNameTracker;
-        }
-
-        /**
-         * Auto generated getter method
-         * @return java.lang.String
-         */
-        public java.lang.String getSectionName() {
-            return localSectionName;
-        }
-
-        /**
-         * Auto generated setter method
-         * @param param SectionName
-         */
-        public void setSectionName(java.lang.String param) {
-            localSectionNameTracker = true;
-
-            this.localSectionName = param;
-        }
-
-        public boolean isSubsectionNameSpecified() {
-            return localSubsectionNameTracker;
-        }
-
-        /**
-         * Auto generated getter method
-         * @return java.lang.String
-         */
-        public java.lang.String getSubsectionName() {
-            return localSubsectionName;
-        }
-
-        /**
-         * Auto generated setter method
-         * @param param SubsectionName
-         */
-        public void setSubsectionName(java.lang.String param) {
-            localSubsectionNameTracker = true;
-
-            this.localSubsectionName = param;
-        }
-
-        /**
-         *
-         * @param parentQName
-         * @param factory
-         * @return org.apache.axiom.om.OMElement
-         */
-        public org.apache.axiom.om.OMElement getOMElement(
-            final javax.xml.namespace.QName parentQName,
-            final org.apache.axiom.om.OMFactory factory)
-            throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
-        }
-
-        public void serialize(final javax.xml.namespace.QName parentQName,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException,
-                org.apache.axis2.databinding.ADBException {
-            serialize(parentQName, xmlWriter, false);
-        }
-
-        public void serialize(final javax.xml.namespace.QName parentQName,
-            javax.xml.stream.XMLStreamWriter xmlWriter, boolean serializeType)
-            throws javax.xml.stream.XMLStreamException,
-                org.apache.axis2.databinding.ADBException {
-            java.lang.String prefix = null;
-            java.lang.String namespace = null;
-
-            prefix = parentQName.getPrefix();
-            namespace = parentQName.getNamespaceURI();
-            writeStartElement(prefix, namespace, parentQName.getLocalPart(),
-                xmlWriter);
-
-            if (serializeType) {
-                java.lang.String namespacePrefix = registerPrefix(xmlWriter,
-                        "http://ws.apache.org/axis2");
-
-                if ((namespacePrefix != null) &&
-                        (namespacePrefix.trim().length() > 0)) {
-                    writeAttribute("xsi",
-                        "http://www.w3.org/2001/XMLSchema-instance", "type",
-                        namespacePrefix + ":getSubsection", xmlWriter);
-                } else {
-                    writeAttribute("xsi",
-                        "http://www.w3.org/2001/XMLSchema-instance", "type",
-                        "getSubsection", xmlWriter);
-                }
-            }
-
-            if (localSectionNameTracker) {
-                namespace = "http://ws.apache.org/axis2";
-                writeStartElement(null, namespace, "sectionName", xmlWriter);
-
-                if (localSectionName == null) {
-                    // write the nil attribute
-                    writeAttribute("xsi",
-                        "http://www.w3.org/2001/XMLSchema-instance", "nil",
-                        "1", xmlWriter);
-                } else {
-                    xmlWriter.writeCharacters(localSectionName);
-                }
-
-                xmlWriter.writeEndElement();
-            }
-
-            if (localSubsectionNameTracker) {
-                namespace = "http://ws.apache.org/axis2";
-                writeStartElement(null, namespace, "subsectionName", xmlWriter);
-
-                if (localSubsectionName == null) {
-                    // write the nil attribute
-                    writeAttribute("xsi",
-                        "http://www.w3.org/2001/XMLSchema-instance", "nil",
-                        "1", xmlWriter);
-                } else {
-                    xmlWriter.writeCharacters(localSubsectionName);
-                }
-
-                xmlWriter.writeEndElement();
-            }
-
-            xmlWriter.writeEndElement();
-        }
-
-        private static java.lang.String generatePrefix(
-            java.lang.String namespace) {
-            if (namespace.equals("http://ws.apache.org/axis2")) {
-                return "ns2";
-            }
-
-            return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
-        }
-
-        /**
-         * Utility method to write an element start tag.
-         */
-        private void writeStartElement(java.lang.String prefix,
-            java.lang.String namespace, java.lang.String localPart,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
-            } else {
-                if (namespace.length() == 0) {
-                    prefix = "";
-                } else if (prefix == null) {
-                    prefix = generatePrefix(namespace);
-                }
-
-                xmlWriter.writeStartElement(prefix, localPart, namespace);
-                xmlWriter.writeNamespace(prefix, namespace);
-                xmlWriter.setPrefix(prefix, namespace);
-            }
-        }
-
-        /**
-         * Util method to write an attribute with the ns prefix
-         */
-        private void writeAttribute(java.lang.String prefix,
-            java.lang.String namespace, java.lang.String attName,
-            java.lang.String attValue,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
-                xmlWriter.writeNamespace(prefix, namespace);
-                xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
-            }
-        }
-
-        /**
-         * Util method to write an attribute without the ns prefix
-         */
-        private void writeAttribute(java.lang.String namespace,
-            java.lang.String attName, java.lang.String attValue,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            if (namespace.equals("")) {
-                xmlWriter.writeAttribute(attName, attValue);
-            } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
-            }
-        }
-
-        /**
-         * Util method to write an attribute without the ns prefix
-         */
-        private void writeQNameAttribute(java.lang.String namespace,
-            java.lang.String attName, javax.xml.namespace.QName qname,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            java.lang.String attributeNamespace = qname.getNamespaceURI();
-            java.lang.String attributePrefix = xmlWriter.getPrefix(attributeNamespace);
-
-            if (attributePrefix == null) {
-                attributePrefix = registerPrefix(xmlWriter, attributeNamespace);
-            }
-
-            java.lang.String attributeValue;
-
-            if (attributePrefix.trim().length() > 0) {
-                attributeValue = attributePrefix + ":" + qname.getLocalPart();
-            } else {
-                attributeValue = qname.getLocalPart();
-            }
-
-            if (namespace.equals("")) {
-                xmlWriter.writeAttribute(attName, attributeValue);
-            } else {
-                registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
-            }
-        }
-
-        /**
-         *  method to handle Qnames
-         */
-        private void writeQName(javax.xml.namespace.QName qname,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            java.lang.String namespaceURI = qname.getNamespaceURI();
-
-            if (namespaceURI != null) {
-                java.lang.String prefix = xmlWriter.getPrefix(namespaceURI);
-
-                if (prefix == null) {
-                    prefix = generatePrefix(namespaceURI);
-                    xmlWriter.writeNamespace(prefix, namespaceURI);
-                    xmlWriter.setPrefix(prefix, namespaceURI);
-                }
-
-                if (prefix.trim().length() > 0) {
-                    xmlWriter.writeCharacters(prefix + ":" +
-                        org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                            qname));
-                } else {
-                    // i.e this is the default namespace
-                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                            qname));
-                }
-            } else {
-                xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                        qname));
-            }
-        }
-
-        private void writeQNames(javax.xml.namespace.QName[] qnames,
-            javax.xml.stream.XMLStreamWriter xmlWriter)
-            throws javax.xml.stream.XMLStreamException {
-            if (qnames != null) {
-                // we have to store this data until last moment since it is not possible to write any
-                // namespace data after writing the charactor data
-                java.lang.StringBuffer stringToWrite = new java.lang.StringBuffer();
-                java.lang.String namespaceURI = null;
-                java.lang.String prefix = null;
-
-                for (int i = 0; i < qnames.length; i++) {
-                    if (i > 0) {
-                        stringToWrite.append(" ");
-                    }
-
-                    namespaceURI = qnames[i].getNamespaceURI();
-
-                    if (namespaceURI != null) {
-                        prefix = xmlWriter.getPrefix(namespaceURI);
-
-                        if ((prefix == null) || (prefix.length() == 0)) {
-                            prefix = generatePrefix(namespaceURI);
-                            xmlWriter.writeNamespace(prefix, namespaceURI);
-                            xmlWriter.setPrefix(prefix, namespaceURI);
-                        }
-
-                        if (prefix.trim().length() > 0) {
-                            stringToWrite.append(prefix).append(":")
-                                         .append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                                    qnames[i]));
-                        } else {
-                            stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                                    qnames[i]));
-                        }
-                    } else {
-                        stringToWrite.append(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                                qnames[i]));
-                    }
-                }
-
-                xmlWriter.writeCharacters(stringToWrite.toString());
-            }
-        }
-
-        /**
-         * Register a namespace prefix
-         */
-        private java.lang.String registerPrefix(
-            javax.xml.stream.XMLStreamWriter xmlWriter,
-            java.lang.String namespace)
-            throws javax.xml.stream.XMLStreamException {
-            java.lang.String prefix = xmlWriter.getPrefix(namespace);
-
-            if (prefix == null) {
-                prefix = generatePrefix(namespace);
-
-                javax.xml.namespace.NamespaceContext nsContext = xmlWriter.getNamespaceContext();
-
-                while (true) {
-                    java.lang.String uri = nsContext.getNamespaceURI(prefix);
-
-                    if ((uri == null) || (uri.length() == 0)) {
-                        break;
-                    }
-
-                    prefix = org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
-                }
-
-                xmlWriter.writeNamespace(prefix, namespace);
-                xmlWriter.setPrefix(prefix, namespace);
-            }
-
-            return prefix;
-        }
-
-        /**
-         *  Factory class that keeps the parse method
-         */
-        public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
-            /**
-             * static method to create the object
-             * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
-             *                If this object is not an element, it is a complex type and the reader is at the event just after the outer start element
-             * Postcondition: If this object is an element, the reader is positioned at its end element
-             *                If this object is a complex type, the reader is positioned at the end element of its outer element
-             */
-            public static GetSubsection parse(
-                javax.xml.stream.XMLStreamReader reader)
-                throws java.lang.Exception {
-                GetSubsection object = new GetSubsection();
-
-                int event;
-                javax.xml.namespace.QName currentQName = null;
-                java.lang.String nillableValue = null;
-                java.lang.String prefix = "";
-                java.lang.String namespaceuri = "";
-
-                try {
-                    while (!reader.isStartElement() && !reader.isEndElement())
-                        reader.next();
-
-                    currentQName = reader.getName();
-
-                    if (reader.getAttributeValue(
-                                "http://www.w3.org/2001/XMLSchema-instance",
-                                "type") != null) {
-                        java.lang.String fullTypeName = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-                                "type");
-
-                        if (fullTypeName != null) {
-                            java.lang.String nsPrefix = null;
-
-                            if (fullTypeName.indexOf(":") > -1) {
-                                nsPrefix = fullTypeName.substring(0,
-                                        fullTypeName.indexOf(":"));
-                            }
-
-                            nsPrefix = (nsPrefix == null) ? "" : nsPrefix;
-
-                            java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(
-                                        ":") + 1);
-
-                            if (!"getSubsection".equals(type)) {
-                                //find namespace for the prefix
-                                java.lang.String nsUri = reader.getNamespaceContext()
-                                                               .getNamespaceURI(nsPrefix);
-
-                                return (GetSubsection) ExtensionMapper.getTypeObject(nsUri,
-                                    type, reader);
-                            }
-                        }
-                    }
-
-                    // Note all attributes that were handled. Used to differ normal attributes
-                    // from anyAttributes.
-                    java.util.Vector handledAttributes = new java.util.Vector();
-
-                    reader.next();
-
-                    while (!reader.isStartElement() && !reader.isEndElement())
-                        reader.next();
-
-                    if (reader.isStartElement() &&
-                            new javax.xml.namespace.QName(
-                                "http://ws.apache.org/axis2", "sectionName").equals(
-                                reader.getName())) {
-                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-                                "nil");
-
-                        if (!"true".equals(nillableValue) &&
-                                !"1".equals(nillableValue)) {
-                            java.lang.String content = reader.getElementText();
-
-                            object.setSectionName(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                                    content));
-                        } else {
-                            reader.getElementText(); // throw away text nodes if any.
-                        }
-
-                        reader.next();
-                    } // End of if for expected property start element
-
-                    else {
-                    }
-
-                    while (!reader.isStartElement() && !reader.isEndElement())
-                        reader.next();
-
-                    if (reader.isStartElement() &&
-                            new javax.xml.namespace.QName(
-                                "http://ws.apache.org/axis2", "subsectionName").equals(
-                                reader.getName())) {
-                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
-                                "nil");
-
-                        if (!"true".equals(nillableValue) &&
-                                !"1".equals(nillableValue)) {
-                            java.lang.String content = reader.getElementText();
-
-                            object.setSubsectionName(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
-                                    content));
-                        } else {
-                            reader.getElementText(); // throw away text nodes if any.
-                        }
-
-                        reader.next();
+                        object.setSectionList((Section[]) org.apache.axis2.databinding.utils.ConverterUtil.convertToArray(
+                                Section.class, list2));
                     } // End of if for expected property start element
 
                     else {

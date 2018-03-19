@@ -1,8 +1,7 @@
 package thrift_servise;
 
 
-import org.apache.ws.axis2.CustomServiceStub;
-import soap.SOAPServiseConnector;
+import thrift_servise.servise.JsRefference;
 import thrift_servise.servise.Section;
 
 import javax.swing.*;
@@ -15,9 +14,12 @@ import java.util.List;
 public class Contoller {
     private ThriftServiseConnector serviseConnector = new ThriftServiseConnector();
 
-    public JTree buildTree(){
+    public JTree buildInfo(JLabel jLabel){
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("JsReference");
-        for (Section section :/*serviseConnector.getSectionsArray()*/getSections()) {
+        JsRefference jsRefference= getRef();
+        jLabel.setText("Author: "+jsRefference.getAuthor().getFirstName()+" "+jsRefference.getAuthor().getSecondName()+",from "+jsRefference.getAuthor().getSpeciality());
+
+        for (Section section :/*serviseConnector.getSectionsArray()*/jsRefference.getSectionsList()) {
             System.out.println(section.name);
             DefaultMutableTreeNode node=new DefaultMutableTreeNode(section.getName());
             List<String> arr=section.getSubsectionList();
@@ -49,8 +51,8 @@ public class Contoller {
         // tree.collapsePath(parent);
     }
 
-    private List<Section> getSections() {
-        return serviseConnector.getSectionsArray();
+    private JsRefference getRef() {
+        return serviseConnector.getJsRefference();
     }
 
 

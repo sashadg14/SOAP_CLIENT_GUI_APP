@@ -18,12 +18,13 @@ public class GUI {
     private int leftAligmentBtn=300;
     private int heightOfTextArea=500,widthOfTextArea=1000;
 
+    private JLabel authorLable;
+
     public GUI() {
         deleteSubsectionButton = new JButton("Удалить подраздел");
         editTextButton = new JButton("Изменить содержимое");
         addSubsectionButton = new JButton("Добавить подраздел");
         addSectionButton= new JButton("Добавить раздел");
-
         jFrame.getContentPane().setLayout(null);
         jFrame.add(reloadButton);
         reloadButton.setBounds(0, 0, 40, 30);
@@ -49,6 +50,10 @@ public class GUI {
         editTextButton.setBounds(1000, 700, 200, 30);
         editTextButton.addActionListener(createEditBtnActionListener());
         jFrame.add(editTextButton);
+
+        authorLable=new JLabel("Author");
+        authorLable.setBounds(leftAligmentBtn,heightOfTextArea+200,300,50);
+        jFrame.add(authorLable);
 
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -94,7 +99,7 @@ public class GUI {
     private void createTree(){
         if(jScrollPane!=null)
         jFrame.remove(jScrollPane);
-        jTree= new Contoller().buildTree();
+        jTree= new Contoller().buildInfo(authorLable);
         jScrollPane = new JScrollPane(jTree);
         jScrollPane.setBounds(20, 100, 200, 700);
         jFrame.add(jScrollPane);

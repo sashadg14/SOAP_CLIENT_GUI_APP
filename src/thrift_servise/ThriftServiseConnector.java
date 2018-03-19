@@ -6,30 +6,28 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import thrift_servise.servise.JsReferenceService;
+import thrift_servise.servise.JsRefference;
 import thrift_servise.servise.Section;
 import thrift_servise.servise.Subsection;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ThriftServiseConnector{
 
     String ip="localhost";
     int port=9090;
 
-    public List<Section> getSectionsArray() {
+    public JsRefference getJsRefference() {
         try {
             TTransport transport= new TSocket(ip, port);
             transport.open();
             TProtocol protocol = new TBinaryProtocol(transport);
             JsReferenceService.Client client = new JsReferenceService.Client(protocol);
-            List<Section> strings=(client.getSections());
+            JsRefference jsRefference=(client.getJsRefferense());
             transport.close();
-            if (strings!=null)
-                return strings;
-            return new ArrayList<>();
+            return jsRefference;
         } catch (TException x) {
-            return new ArrayList<>();
+            return null;
         }
     }
 

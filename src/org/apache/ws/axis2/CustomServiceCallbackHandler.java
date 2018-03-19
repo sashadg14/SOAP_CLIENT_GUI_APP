@@ -42,21 +42,6 @@ public abstract class CustomServiceCallbackHandler {
 
     // No methods generated for meps other than in-out
 
-    /**
-     * auto generated Axis2 call back method for getSections method
-     * override this method for handling normal response from getSections operation
-     */
-    public void receiveResultgetSections(
-        org.apache.ws.axis2.CustomServiceStub.GetSectionsResponse result) {
-    }
-
-    /**
-     * auto generated Axis2 Error handler
-     * override this method for handling error response from getSections operation
-     */
-    public void receiveErrorgetSections(java.lang.Exception e) {
-    }
-
     // No methods generated for meps other than in-out
 
     // No methods generated for meps other than in-out
@@ -74,5 +59,20 @@ public abstract class CustomServiceCallbackHandler {
      * override this method for handling error response from getSubsection operation
      */
     public void receiveErrorgetSubsection(java.lang.Exception e) {
+    }
+
+    /**
+     * auto generated Axis2 call back method for getJsRefference method
+     * override this method for handling normal response from getJsRefference operation
+     */
+    public void receiveResultgetJsRefference(
+        org.apache.ws.axis2.CustomServiceStub.GetJsRefferenceResponse result) {
+    }
+
+    /**
+     * auto generated Axis2 Error handler
+     * override this method for handling error response from getJsRefference operation
+     */
+    public void receiveErrorgetJsRefference(java.lang.Exception e) {
     }
 }
